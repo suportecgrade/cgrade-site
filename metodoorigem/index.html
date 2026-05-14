@@ -87,6 +87,21 @@ header.scrolled{background:rgba(31,77,58,0.95);backdrop-filter:blur(20px);paddin
 .hero-scroll .mouse::after{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:4px;height:8px;background:var(--gold);border-radius:2px;animation:scroll-dot 2s infinite}
 @keyframes scroll-dot{0%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(15px)}}
 @keyframes bounce-scroll{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+.agro-visual{background:linear-gradient(180deg,#f0ebe3 0%,#f8f5ef 100%);padding:85px 0}
+.agro-visual-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.agro-3d-stage{perspective:1200px;min-height:320px;display:flex;align-items:center;justify-content:center}
+.agro-3d-cube{position:relative;width:220px;height:220px;transform-style:preserve-3d;animation:spin-cube 14s linear infinite}
+.agro-face{position:absolute;inset:0;background:linear-gradient(145deg,#2D7A5A,#1F4D3A);border:2px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;font-size:3rem;color:#fff;box-shadow:0 10px 30px rgba(31,77,58,0.25)}
+.agro-face:nth-child(1){transform:translateZ(110px)}
+.agro-face:nth-child(2){transform:rotateY(180deg) translateZ(110px)}
+.agro-face:nth-child(3){transform:rotateY(90deg) translateZ(110px)}
+.agro-face:nth-child(4){transform:rotateY(-90deg) translateZ(110px)}
+.agro-face:nth-child(5){transform:rotateX(90deg) translateZ(110px)}
+.agro-face:nth-child(6){transform:rotateX(-90deg) translateZ(110px)}
+@keyframes spin-cube{0%{transform:rotateX(-18deg) rotateY(0deg)}100%{transform:rotateX(-18deg) rotateY(360deg)}}
+.agro-points{display:grid;gap:12px}
+.agro-point{padding:14px 16px;border-radius:12px;background:#fff;box-shadow:var(--shadow);border:1px solid #e5dac9;transition:var(--tr)}
+.agro-point:hover{transform:translateY(-4px) scale(1.01);box-shadow:var(--shadow-hov)}
 .section{padding:100px 0;position:relative}
 .section-label{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.75rem;text-transform:uppercase;letter-spacing:3px;color:var(--gold);margin-bottom:12px}
 .section-title{font-size:clamp(1.8rem,3.5vw,3rem);line-height:1.2;margin-bottom:20px;color:var(--graphite)}
@@ -189,6 +204,16 @@ footer p{font-size:0.85rem}
 .nav-links{display:none}
 .audience-grid{grid-template-columns:1fr}
 .mentor-experience{grid-template-columns:1fr}
+.agro-visual-wrap{grid-template-columns:1fr}
+.agro-3d-stage{min-height:240px}
+.agro-3d-cube{width:170px;height:170px}
+.agro-face:nth-child(1),.agro-face:nth-child(2),.agro-face:nth-child(3),.agro-face:nth-child(4),.agro-face:nth-child(5),.agro-face:nth-child(6){transform-origin:center}
+.agro-face:nth-child(1){transform:translateZ(85px)}
+.agro-face:nth-child(2){transform:rotateY(180deg) translateZ(85px)}
+.agro-face:nth-child(3){transform:rotateY(90deg) translateZ(85px)}
+.agro-face:nth-child(4){transform:rotateY(-90deg) translateZ(85px)}
+.agro-face:nth-child(5){transform:rotateX(90deg) translateZ(85px)}
+.agro-face:nth-child(6){transform:rotateX(-90deg) translateZ(85px)}
 }
 @media(max-width:600px){
 .section{padding:60px 0}
@@ -251,6 +276,31 @@ Turma 1 com vagas limitadas. Atendimento direto para validar sua participação.
 <div class="hero-scroll">
 <div class="mouse"></div>
 <span>role para explorar</span>
+</div>
+</section>
+
+<section class="agro-visual">
+<div class="container agro-visual-wrap">
+<div>
+<span class="section-label">Experiência Imersiva</span>
+<h2 class="section-title">Visão <span>360º do Agro Comercial</span></h2>
+<p class="section-sub">Uma dinâmica visual pensada para deixar o conteúdo mais claro, conectado e moderno, com foco em tomada de decisão na comercialização.</p>
+<div class="agro-points" style="margin-top:22px">
+<div class="agro-point"><strong>Originação:</strong> mapeie oportunidades de compra com método.</div>
+<div class="agro-point"><strong>Risco:</strong> avalie cenários com critérios objetivos.</div>
+<div class="agro-point"><strong>Negociação:</strong> eleve sua segurança comercial com estrutura.</div>
+</div>
+</div>
+<div class="agro-3d-stage" aria-hidden="true">
+<div class="agro-3d-cube">
+<div class="agro-face">&#127805;</div>
+<div class="agro-face">&#128200;</div>
+<div class="agro-face">&#127793;</div>
+<div class="agro-face">&#129309;</div>
+<div class="agro-face">&#127806;</div>
+<div class="agro-face">&#128202;</div>
+</div>
+</div>
 </div>
 </section>
 
@@ -407,7 +457,7 @@ Turma 1 com vagas limitadas. Atendimento direto para validar sua participação.
 </div>
 <div class="mission-box">
 <h4>&#127769; Nossa Missão</h4>
-<p>ajudar mais pessoas a entenderem o agro de forma prática, profissional e estratégica.</p>
+<p>Ajudar mais pessoas a entenderem o agro de forma prática, profissional e estratégica.</p>
 </div>
 </div>
 </div>
@@ -507,7 +557,7 @@ O Método ORIGEM não promete emprego imediato, promoção automática ou result
 AOS.init({once:true,offset:80,duration:800});
 const header=document.getElementById('header');
 window.addEventListener('scroll',()=>{header.classList.toggle('scrolled',window.scrollY>60)});
-document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const h=a.getAttribute('href');if(h!=='#'){e.preventDefault();document.querySelector(h).scrollIntoView({behavior:'smooth'})}})});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const h=a.getAttribute('href');if(h!=='#'){const target=document.querySelector(h);if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'})}}})});
 </script>
 </body>
 </html>
