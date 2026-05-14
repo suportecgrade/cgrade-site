@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Método ORIGEM - Turma 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--green-deep:#1F4D3A;
+--green-light:#2D7A5A;
+--beige:#D8C3A5;
+--beige-light:#E8D9C8;
+--off-white:#F5F3EE;
+--gold:#B08D57;
+--graphite:#2F2F2F;
+--white:#FFFFFF;
+--shadow:0 10px 40px rgba(0,0,0,0.08);
+--shadow-hov:0 20px 60px rgba(0,0,0,0.15);
+--tr:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94)
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--graphite);overflow-x:hidden}
+h1,h2,h3,h4,h5,h6{font-family:'Montserrat',sans-serif;font-weight:700}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;height:auto}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:50px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.05rem;border:2px solid;transition:var(--tr);cursor:pointer}
+.btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(0,0,0,0.2)}
+.btn-green{background:var(--green-deep);color:var(--white);border-color:var(--green-deep)}
+.btn-green:hover{background:transparent;color:var(--green-deep)}
+.btn-gold{background:var(--gold);color:var(--white);border-color:var(--gold)}
+.btn-gold:hover{background:transparent;color:var(--gold)}
+.btn-wpp{background:#25D366;color:var(--white);border-color:#25D366}
+.btn-wpp:hover{background:transparent;color:#25D366}
+.btn-wpp svg,.btn-green svg,.btn-gold svg{width:22px;height:22px;fill:currentColor}
+header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:15px 0;transition:var(--tr)}
+header.scrolled{background:rgba(31,77,58,0.95);backdrop-filter:blur(20px);padding:10px 0;box-shadow:0 4px 30px rgba(0,0,0,0.1)}
+.header-inner{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.5rem;color:var(--white);display:flex;align-items:center;gap:10px}
+.logo span{color:var(--gold)}
+.logo-icon{width:36px;height:36px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--white)}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{color:rgba(255,255,255,0.8);font-size:0.9rem;font-weight:500;transition:var(--tr);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);transition:var(--tr)}
+.nav-links a:hover::after{width:100%}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{padding:10px 24px;background:var(--gold);border-radius:50px;font-weight:700;color:var(--white)!important}
+.nav-cta::after{display:none!important}
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(135deg,#0F2A1F 0%,#1F4D3A 40%,#2D7A5A 100%)}
+.hero::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80') center/cover;opacity:0.12;mix-blend-mode:overlay}
+.hero-particles{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;pointer-events:none}
+.hero-particle{position:absolute;width:4px;height:4px;background:var(--gold);border-radius:50%;animation:float-particle 15s infinite linear;opacity:0}
+.hero-particle:nth-child(1){left:10%;animation-delay:0s;animation-duration:18s}
+.hero-particle:nth-child(2){left:25%;animation-delay:2s;animation-duration:15s;width:3px;height:3px}
+.hero-particle:nth-child(3){left:40%;animation-delay:4s;animation-duration:20s}
+.hero-particle:nth-child(4){left:55%;animation-delay:1s;animation-duration:16s;width:5px;height:5px;background:var(--beige)}
+.hero-particle:nth-child(5){left:70%;animation-delay:3s;animation-duration:22s}
+.hero-particle:nth-child(6){left:85%;animation-delay:5s;animation-duration:14s;width:3px;height:3px}
+.hero-particle:nth-child(7){left:50%;animation-delay:1.5s;animation-duration:19s;background:var(--beige)}
+.hero-particle:nth-child(8){left:15%;animation-delay:3.5s;animation-duration:17s;width:6px;height:6px}
+@keyframes float-particle{
+0%{transform:translateY(100vh) rotate(0deg);opacity:0}
+10%{opacity:1}
+90%{opacity:1}
+100%{transform:translateY(-10vh) rotate(720deg);opacity:0}
+}
+.hero-content{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:120px 0 80px}
+.hero-left h1{font-size:clamp(2rem,4vw,3.8rem);color:var(--white);line-height:1.15;margin-bottom:20px}
+.hero-left h1 span{color:var(--gold)}
+.hero-left p{font-size:clamp(1rem,1.5vw,1.15rem);color:rgba(255,255,255,0.8);line-height:1.7;margin-bottom:30px;max-width:520px}
+.hero-badges{display:flex;gap:20px;margin-bottom:30px;flex-wrap:wrap}
+.hero-badge{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);font-size:0.85rem}
+.hero-badge svg{width:16px;height:16px;fill:var(--gold)}
+.hero-urgency{color:var(--gold);font-size:0.85rem;margin-top:15px;font-weight:500;display:flex;align-items:center;gap:8px}
+.hero-right{display:flex;justify-content:center;align-items:center;perspective:1200px}
+.hero-card{position:relative;width:100%;max-width:420px;border-radius:20px;overflow:hidden;transform:rotateY(-6deg) rotateX(4deg);transition:var(--tr);box-shadow:0 30px 80px rgba(0,0,0,0.35)}
+.hero-card:hover{transform:rotateY(0deg) rotateX(0deg)}
+.hero-card img{width:100%;display:block}
+.hero-card .overlay{position:absolute;bottom:0;left:0;width:100%;padding:30px;background:linear-gradient(transparent,rgba(0,0,0,0.85));color:var(--white)}
+.hero-card .overlay h3{font-size:1.1rem;margin-bottom:4px}
+.hero-card .overlay p{font-size:0.85rem;opacity:0.8}
+.hero-scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,0.5);font-size:0.75rem;animation:bounce-scroll 2s infinite}
+.hero-scroll .mouse{width:24px;height:38px;border:2px solid rgba(255,255,255,0.3);border-radius:12px;position:relative}
+.hero-scroll .mouse::after{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:4px;height:8px;background:var(--gold);border-radius:2px;animation:scroll-dot 2s infinite}
+@keyframes scroll-dot{0%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(15px)}}
+@keyframes bounce-scroll{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+.section{padding:100px 0;position:relative}
+.section-label{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.75rem;text-transform:uppercase;letter-spacing:3px;color:var(--gold);margin-bottom:12px}
+.section-title{font-size:clamp(1.8rem,3.5vw,3rem);line-height:1.2;margin-bottom:20px;color:var(--graphite)}
+.section-title span{color:var(--green-deep)}
+.section-sub{font-size:1.1rem;color:#666;max-width:600px;line-height:1.7}
+.section-title-w{color:var(--white)}
+.section-sub-w{color:rgba(255,255,255,0.7)}
+.problem-section{background:var(--white)}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.problem-img{border-radius:20px;overflow:hidden;box-shadow:var(--shadow);position:relative}
+.problem-img img{width:100%;display:block;transition:var(--tr)}
+.problem-img:hover img{transform:scale(1.03)}
+.term-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.term-tag{padding:8px 18px;background:var(--off-white);border-radius:50px;font-size:0.85rem;font-weight:600;color:var(--green-deep);border:1px solid var(--beige);transition:var(--tr);cursor:default}
+.term-tag:hover{background:var(--green-deep);color:var(--white);border-color:var(--green-deep);transform:translateY(-2px)}
+.audience-section{background:var(--off-white)}
+.audience-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;max-width:1000px;margin:0 auto}
+.audience-col{padding:40px;border-radius:20px;color:var(--white)}
+.audience-col h3{font-size:1.5rem;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.audience-col ul{list-style:none}
+.audience-col ul li{padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.2);font-size:0.95rem;line-height:1.5;display:flex;align-items:flex-start;gap:10px}
+.audience-col ul li:last-child{border-bottom:none}
+.audience-for{background:var(--green-deep)}
+.audience-not{background:#8B3A3A}
+.transform-section{background:var(--white)}
+.transform-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:50px}
+.transform-card{padding:30px;background:var(--off-white);border-radius:16px;border-left:4px solid var(--green-deep);transition:var(--tr)}
+.transform-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hov)}
+.transform-card h4{font-size:1.15rem;margin-bottom:10px;color:var(--green-deep)}
+.transform-card p{color:#666;font-size:0.95rem;line-height:1.6}
+.whatis-section{background:var(--green-deep);color:var(--white);overflow:hidden}
+.whatis-content{max-width:800px;margin:0 auto;text-align:center}
+.whatis-content p{font-size:1.1rem;line-height:1.8;color:rgba(255,255,255,0.85);margin-bottom:30px}
+.whatis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:40px}
+.whatis-item{background:rgba(255,255,255,0.08);padding:24px;border-radius:12px;text-align:center;backdrop-filter:blur(10px)}
+.whatis-item .icon{font-size:2rem;margin-bottom:10px}
+.whatis-item h4{font-size:1rem;margin-bottom:6px}
+.whatis-item p{font-size:0.85rem;color:rgba(255,255,255,0.7);margin:0}
+.curriculum-section{background:var(--white)}
+.modules{max-width:850px;margin:40px auto 0;display:grid;gap:16px}
+.module{display:flex;gap:20px;padding:24px;background:var(--off-white);border-radius:12px;transition:var(--tr);cursor:default}
+.module:hover{transform:translateX(8px);box-shadow:var(--shadow)}
+.module-num{width:48px;height:48px;background:var(--green-deep);color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.1rem;flex-shrink:0}
+.module-content h4{font-size:1.1rem;margin-bottom:6px;color:var(--green-deep)}
+.module-content p{color:#666;font-size:0.95rem;line-height:1.5}
+.mentor-section{background:var(--off-white)}
+.mentor-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.mentor-img{border-radius:20px;overflow:hidden;box-shadow:var(--shadow);position:relative}
+.mentor-img img{width:100%;display:block}
+.mentor-experience{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+.mentor-exp-item{text-align:center;padding:16px;background:var(--green-deep);color:var(--white);border-radius:12px}
+.mentor-exp-item .num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.5rem;color:var(--gold)}
+.mentor-exp-item .label{font-size:0.8rem;color:rgba(255,255,255,0.7);margin-top:4px}
+.mission-box{background:var(--green-deep);color:var(--white);padding:30px;border-radius:16px;margin-top:24px}
+.mission-box h4{color:var(--gold);margin-bottom:8px}
+.mission-box p{color:rgba(255,255,255,0.85);font-size:0.95rem;line-height:1.6}
+.diff-section{background:var(--white)}
+.diff-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:40px}
+.diff-card{padding:30px;background:var(--off-white);border-radius:16px;text-align:center;transition:var(--tr)}
+.diff-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-hov)}
+.diff-card .icon{font-size:2.5rem;margin-bottom:15px}
+.diff-card h4{font-size:1.1rem;margin-bottom:10px;color:var(--green-deep)}
+.diff-card p{color:#666;font-size:0.9rem;line-height:1.5}
+.format-section{background:var(--green-deep);color:var(--white)}
+.format-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:20px;margin-top:40px}
+.format-item{text-align:center;padding:20px;background:rgba(255,255,255,0.08);border-radius:12px;backdrop-filter:blur(10px)}
+.format-item .emoji{font-size:2rem;margin-bottom:10px}
+.format-item strong{display:block;font-size:1rem;margin-bottom:6px}
+.format-item p{font-size:0.85rem;color:rgba(255,255,255,0.7)}
+.pricing-section{background:var(--white);text-align:center}
+.pricing-card{max-width:550px;margin:0 auto;padding:50px 40px;background:var(--off-white);border-radius:24px;box-shadow:var(--shadow);border:1px solid var(--beige)}
+.pricing-card .label{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:3px;color:var(--gold);margin-bottom:8px}
+.pricing-card .price{font-family:'Montserrat',sans-serif;font-weight:900;font-size:4rem;color:var(--green-deep);margin:10px 0}
+.pricing-card .price span{font-size:1.5rem;font-weight:600}
+.pricing-card .price-desc{color:#666;font-size:0.95rem;line-height:1.6;margin-bottom:24px}
+.pricing-features{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:30px}
+.pricing-feat{display:flex;align-items:center;gap:8px;font-size:0.9rem;color:var(--graphite)}
+.pricing-feat svg{width:18px;height:18px;fill:var(--green-deep)}
+.faq-section{background:var(--off-white)}
+.faq-grid{max-width:750px;margin:40px auto 0;display:grid;gap:12px}
+.faq-item{background:var(--white);padding:24px;border-radius:12px;border-left:4px solid var(--gold);transition:var(--tr)}
+.faq-item:hover{box-shadow:var(--shadow)}
+.faq-item h4{font-size:1rem;margin-bottom:8px;color:var(--graphite)}
+.faq-item p{color:#666;font-size:0.95rem;line-height:1.6}
+.final-cta{background:linear-gradient(135deg,#0F2A1F 0%,#1F4D3A 50%,#2D7A5A 100%);color:var(--white);text-align:center;padding:100px 0;position:relative;overflow:hidden}
+.final-cta::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80') center/cover;opacity:0.08;mix-blend-mode:overlay}
+.final-cta .container{position:relative;z-index:2}
+.final-cta h2{font-size:clamp(1.8rem,3vw,2.8rem);margin-bottom:16px}
+.final-cta p{color:rgba(255,255,255,0.8);font-size:1.1rem;max-width:600px;margin:0 auto 30px;line-height:1.7}
+.disclaimer{background:var(--graphite);color:rgba(255,255,255,0.7);text-align:center;padding:30px 0;font-size:0.85rem;line-height:1.6}
+footer{background:#0F2A1F;color:rgba(255,255,255,0.6);padding:40px 0;text-align:center}
+footer .social{display:flex;justify-content:center;gap:20px;margin:20px 0}
+footer .social a{color:rgba(255,255,255,0.5);font-size:0.9rem;transition:var(--tr)}
+footer .social a:hover{color:var(--gold)}
+footer p{font-size:0.85rem}
+@media(max-width:900px){
+.hero-content,.problem-grid,.mentor-grid{grid-template-columns:1fr}
+.hero-right{display:none}
+.hero-scroll{bottom:20px}
+.nav-links{display:none}
+.audience-grid{grid-template-columns:1fr}
+.mentor-experience{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+.section{padding:60px 0}
+.hero-left h1{font-size:1.8rem}
+.pricing-card{padding:30px 20px}
+.pricing-card .price{font-size:3rem}
+}
+</style>
+</head>
+<body>
+
+<header id="header">
+<div class="container header-inner">
+<div class="logo"><div class="logo-icon">&#9670;</div> MÉTODO <span>ORIGEM</span></div>
+<nav class="nav-links">
+<a href="#problema">Problema</a>
+<a href="#audiencia">Para quem é</a>
+<a href="#curriculo">Módulos</a>
+<a href="#mentor">Mentor</a>
+<a href="#investimento">Investimento</a>
+<a href="#faq">FAQ</a>
+<a href="https://w.app/metodoorigem" class="nav-cta">Fale Conosco</a>
+</nav>
+</div>
+</header>
+
+<section class="hero">
+<div class="hero-particles">
+<div class="hero-particle"></div><div class="hero-particle"></div><div class="hero-particle"></div>
+<div class="hero-particle"></div><div class="hero-particle"></div><div class="hero-particle"></div>
+<div class="hero-particle"></div><div class="hero-particle"></div>
+</div>
+<div class="container hero-content">
+<div class="hero-left" data-aos="fade-right" data-aos-duration="1000">
+<div class="hero-badges">
+<div class="hero-badge"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Turma 1 - Vagas Limitadas</div>
+<div class="hero-badge"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Início 18/06/2026</div>
+</div>
+<h1>Entre no agro <span>pela porta certa</span></h1>
+<p>Uma formação direta para quem quer entender originação, barter, compra e venda de grãos, gestão de risco e relacionamento comercial no agro &mdash; com a visão de quem viveu o mercado na prática.</p>
+<a href="https://w.app/metodoorigem" class="btn btn-wpp">
+<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+Quero saber se essa turma é para mim
+</a>
+<div class="hero-urgency">
+<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+Turma 1 com vagas limitadas. Atendimento direto para validar sua participação.
+</div>
+</div>
+<div class="hero-right" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+<div class="hero-card">
+<img src="https://images.unsplash.com/photo-1592982537447-6f2a6a0c7c11?w=600&q=80" alt="Campo de soja ao amanhecer">
+<div class="overlay">
+<h3>Cristiano Grade</h3>
+<p>Profissional do agronegócio com ampla experiência em comercialização de grãos</p>
+</div>
+</div>
+</div>
+</div>
+<div class="hero-scroll">
+<div class="mouse"></div>
+<span>role para explorar</span>
+</div>
+</section>
+
+<section class="section problem-section" id="problema">
+<div class="container">
+<div class="problem-grid">
+<div class="problem-text" data-aos="fade-right">
+<span class="section-label">O Problema</span>
+<h2 class="section-title">O agro cresce, mas pouca gente sabe como entrar nas áreas que <span>mais movimentam dinheiro</span></h2>
+<p class="section-sub">Muita gente olha para o agro e enxerga apenas lavoura, máquinas e produção. Mas existe uma parte estratégica: a comercialização.</p>
+<br>
+<p style="color:#666;line-height:1.7">O problema é que quase ninguém ensina isso de forma prática. A maioria aprende no improviso, tentando entender sozinho termos como:</p>
+<div class="term-tags">
+<span class="term-tag">Originação de grãos</span>
+<span class="term-tag">Barter</span>
+<span class="term-tag">Basis</span>
+<span class="term-tag">Prêmio</span>
+<span class="term-tag">Hedge</span>
+<span class="term-tag">Trava de preço</span>
+<span class="term-tag">Custo em sacas</span>
+<span class="term-tag">Gestão de risco</span>
+</div>
+</div>
+<div class="problem-img" data-aos="fade-left">
+<img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&q=80" alt="Armazém de grãos">
+</div>
+</div>
+</div>
+</section>
+
+<section class="section audience-section" id="audiencia">
+<div class="container">
+<div data-aos="fade-up">
+<span class="section-label">Público</span>
+<h2 class="section-title">Para quem é <span>e não é</span></h2>
+</div>
+<div class="audience-grid" style="margin-top:40px">
+<div class="audience-col audience-for" data-aos="flip-left">
+<h3><span style="font-size:1.5rem">&#10003;</span> Para quem é</h3>
+<ul>
+<li>Quer entrar no agronegócio, mas ainda não sabe por onde começar</li>
+<li>Já trabalha no agro, mas quer migrar para áreas comerciais, grãos, barter ou originação</li>
+<li>Atua com insumos, assistência técnica, cooperativa, revenda ou cerealista e quer entender a lógica da comercialização</li>
+<li>Quer se preparar para oportunidades em empresas agrícolas, tradings, cooperativas e indústrias</li>
+<li>Quer falar a linguagem do mercado com mais segurança</li>
+</ul>
+</div>
+<div class="audience-col audience-not" data-aos="flip-right">
+<h3><span style="font-size:1.5rem">&#10007;</span> Não é para quem</h3>
+<ul>
+<li>Busca uma formação apenas acadêmica ou conceitual</li>
+<li>Não quer estudar mercado, números, negociação e risco</li>
+<li>Procura promessa fácil de emprego ou resultado imediato</li>
+<li>Não está disposto a evoluir profissionalmente</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section transform-section">
+<div class="container">
+<div data-aos="fade-up" style="text-align:center">
+<span class="section-label">Transformação</span>
+<h2 class="section-title">O que você vai <span>conseguir enxergar</span></h2>
+<p class="section-sub" style="margin:0 auto">Ao final da formação, você terá uma visão muito mais clara sobre a cadeia comercial de grãos e como se posicionar profissionalmente.</p>
+</div>
+<div class="transform-grid">
+<div class="transform-card" data-aos="fade-up" data-aos-delay="0"><h4>Construção de Operações</h4><p>Entenderá como uma operação de compra e venda de grãos é construída passo a passo.</p></div>
+<div class="transform-card" data-aos="fade-up" data-aos-delay="100"><h4>Gestão de Risco</h4><p>Conheça conceitos de hedge e travas para proteger sua margem e exposição.</p></div>
+<div class="transform-card" data-aos="fade-up" data-aos-delay="200"><h4>Originação Real</h4><p>Domine a originação junto ao produtor e como mapear seu potencial de negócio.</p></div>
+<div class="transform-card" data-aos="fade-up" data-aos-delay="0"><h4>Negociação Profissional</h4><p>Converse com segurança com produtores e empresas do setor.</p></div>
+<div class="transform-card" data-aos="fade-up" data-aos-delay="100"><h4>Barter Estratégico</h4><p>Conecte insumos, grãos, crédito e risco através de operações de troca.</p></div>
+<div class="transform-card" data-aos="fade-up" data-aos-delay="200"><h4>Formação de Preço</h4><p>Entenda basis, câmbio e Chicago na formação do mercado.</p></div>
+<div class="transform-card" data-aos="fade-up" data-aos-delay="300"><h4>Posicionamento Profissional</h4><p>Construa uma narrativa profissional forte para conquistar oportunidades.</p></div>
+<div class="transform-card" data-aos="fade-up" data-aos-delay="300"><h4>Competências Valorizadas</h4><p>Entenda o que o mercado busca em profissionais da área.</p></div>
+</div>
+</div>
+</section>
+
+<section class="section whatis-section">
+<div class="container">
+<div data-aos="fade-up">
+<span class="section-label" style="color:var(--gold)">O que é</span>
+<h2 class="section-title section-title-w">Método <span style="color:var(--gold)">ORIGEM</span></h2>
+<div class="whatis-content">
+<p>Uma jornada de formação prática para profissionais que desejam atuar ou evoluir nas áreas de comercialização de grãos, originação, barter e gestão de risco. Criado a partir da vivência real do mercado, com linguagem simples e foco em aplicação direta.</p>
+</div>
+</div>
+<div class="whatis-grid" data-aos="fade-up" data-aos-delay="200">
+<div class="whatis-item"><div class="icon">&#127793;</div><h4>Como o produtor pensa</h4><p>Entenda a lógica de quem produz</p></div>
+<div class="whatis-item"><div class="icon">&#127963;</div><h4>Como a empresa compra</h4><p>Visão do lado comprador</p></div>
+<div class="whatis-item"><div class="icon">&#9888;</div><h4>Como o risco aparece</h4><p>Identifique e gerencie riscos</p></div>
+<div class="whatis-item"><div class="icon">&#128200;</div><h4>Como o preço se forma</h4><p>Entenda a formação de preços</p></div>
+<div class="whatis-item"><div class="icon">&#129309;</div><h4>Relacionamento comercial</h4><p>Construa negócios duradouros</p></div>
+<div class="whatis-item"><div class="icon">&#127891;</div><h4>Posicionamento profissional</h4><p>Destaque-se no mercado</p></div>
+</div>
+</div>
+</section>
+
+<section class="section curriculum-section" id="curriculo">
+<div class="container">
+<div data-aos="fade-up" style="text-align:center">
+<span class="section-label">Conteúdo</span>
+<h2 class="section-title">Conteúdo <span>Programático</span></h2>
+<p class="section-sub" style="margin:0 auto">Um roteiro prático e direto para dominar a comercialização de grãos.</p>
+</div>
+<div class="modules">
+<div class="module" data-aos="fade-up"><div class="module-num">01</div><div class="module-content"><h4>Fundamentos da Cadeia de Grãos</h4><p>Entenda o fluxo completo do grão, da fazenda ao mercado final.</p></div></div>
+<div class="module" data-aos="fade-up" data-aos-delay="100"><div class="module-num">02</div><div class="module-content"><h4>Originação na Prática</h4><p>O que faz um originador de sucesso. Como construir carteira e mapear potencial.</p></div></div>
+<div class="module" data-aos="fade-up" data-aos-delay="200"><div class="module-num">03</div><div class="module-content"><h4>Barter e Troca de Insumos</h4><p>Como funciona uma operação de troca. Análise de custo em sacas e riscos.</p></div></div>
+<div class="module" data-aos="fade-up" data-aos-delay="300"><div class="module-num">04</div><div class="module-content"><h4>Formação de Preço</h4><p>Chicago, dólar, prêmio e basis. Como o preço chega ao produtor.</p></div></div>
+<div class="module" data-aos="fade-up" data-aos-delay="400"><div class="module-num">05</div><div class="module-content"><h4>Gestão de Risco e Hedge</h4><p>Conceitos básicos de risco de mercado. Travas e contratos.</p></div></div>
+<div class="module" data-aos="fade-up" data-aos-delay="500"><div class="module-num">06</div><div class="module-content"><h4>Negociação e Postura Comercial</h4><p>Como abordar produtores e decisores com postura de valor.</p></div></div>
+<div class="module" data-aos="fade-up" data-aos-delay="600"><div class="module-num">07</div><div class="module-content"><h4>Carreira no Agro Comercial</h4><p>Principais cargos, competências valorizadas e preparação para oportunidades.</p></div></div>
+</div>
+</div>
+</section>
+
+<section class="section diff-section">
+<div class="container">
+<div data-aos="fade-up" style="text-align:center">
+<span class="section-label">Diferenciais</span>
+<h2 class="section-title">Por que essa formação é <span>diferente?</span></h2>
+<p class="section-sub" style="margin:0 auto">Porque ela nasce da vivência real do mercado.</p>
+</div>
+<div class="diff-grid">
+<div class="diff-card" data-aos="zoom-in" data-aos-delay="0"><div class="icon">&#128172;</div><h4>Linguagem simples e direta</h4><p>Não é um curso cheio de termos difíceis apenas para impressionar.</p></div>
+<div class="diff-card" data-aos="zoom-in" data-aos-delay="100"><div class="icon">&#128101;</div><h4>Turma Reduzida</h4><p>Primeira Turma Fundadora com máximo de 15 alunos.</p></div>
+<div class="diff-card" data-aos="zoom-in" data-aos-delay="200"><div class="icon">&#127758;</div><h4>Exemplos práticos de mercado</h4><p>Casos reais de originação, barter e gestão de risco.</p></div>
+<div class="diff-card" data-aos="zoom-in" data-aos-delay="300"><div class="icon">&#127942;</div><h4>Valor especial de lançamento</h4><p>Condições diferenciadas para a turma fundadora.</p></div>
+</div>
+</div>
+</section>
+
+<section class="section mentor-section" id="mentor">
+<div class="container">
+<div data-aos="fade-up" style="text-align:center;margin-bottom:50px">
+<span class="section-label">Mentor</span>
+<h2 class="section-title">Com quem você vai <span>aprender</span></h2>
+</div>
+<div class="mentor-grid">
+<div class="mentor-img" data-aos="fade-right">
+<img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80" alt="Cristiano Grade - Profissional do Agronegócio">
+</div>
+<div data-aos="fade-left">
+<h3 style="font-size:1.8rem;margin-bottom:8px;color:var(--green-deep)">Cristiano Grade</h3>
+<p style="color:#666;line-height:1.7;margin-bottom:20px">Profissional do agronegócio com ampla experiência em comercialização de grãos, barter, gestão de risco, compra e venda, relacionamento com produtores e liderança de times comerciais.</p>
+<p style="color:#666;line-height:1.7">Atuou próximo das principais decisões que conectam o campo ao mercado: formação de preço, originação, negociação, gestão de margem e construção de relacionamento comercial.</p>
+<div class="mentor-experience">
+<div class="mentor-exp-item"><div class="num">15+</div><div class="label">Anos de experiência</div></div>
+<div class="mentor-exp-item"><div class="num">NAC</div><div class="label">Atuação nacional</div></div>
+<div class="mentor-exp-item"><div class="num">LÍDER</div><div class="label">Liderança de times</div></div>
+</div>
+<div class="mission-box">
+<h4>&#127769; Nossa Missão</h4>
+<p>ajudar mais pessoas a entenderem o agro de forma prática, profissional e estratégica.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section format-section">
+<div class="container">
+<div data-aos="fade-up" style="text-align:center">
+<span class="section-label" style="color:var(--gold)">Formato</span>
+<h2 class="section-title section-title-w">Formato da <span style="color:var(--gold)">Turma 1</span></h2>
+</div>
+<div class="format-grid">
+<div class="format-item" data-aos="fade-up" data-aos-delay="0"><div class="emoji">&#127908;</div><strong>Aulas ao vivo</strong><p>Sessões interativas com o mentor</p></div>
+<div class="format-item" data-aos="fade-up" data-aos-delay="100"><div class="emoji">&#128197;</div><strong>Início 18/06</strong><p>18 de junho de 2026</p></div>
+<div class="format-item" data-aos="fade-up" data-aos-delay="200"><div class="emoji">&#9200;</div><strong>Carga Horária</strong><p>7 encontros de 1h30</p></div>
+<div class="format-item" data-aos="fade-up" data-aos-delay="300"><div class="emoji">&#128101;</div><strong>Turma Reduzida</strong><p>Máximo 15 alunos</p></div>
+<div class="format-item" data-aos="fade-up" data-aos-delay="400"><div class="emoji">&#128218;</div><strong>Material de Apoio</strong><p>Teoria e prática</p></div>
+<div class="format-item" data-aos="fade-up" data-aos-delay="500"><div class="emoji">&#127916;</div><strong>Gravações</strong><p>Revisão posterior</p></div>
+<div class="format-item" data-aos="fade-up" data-aos-delay="600"><div class="emoji">&#128221;</div><strong>Certificado</strong><p>Conclusão da formação</p></div>
+<div class="format-item" data-aos="fade-up" data-aos-delay="700"><div class="emoji">&#128064;</div><strong>Vagas Limitadas</strong><p>Até 15 participantes</p></div>
+</div>
+</div>
+</section>
+
+<section class="section pricing-section" id="investimento">
+<div class="container">
+<div data-aos="fade-up">
+<span class="section-label">Investimento</span>
+<h2 class="section-title">Turma <span>Fundadora</span></h2>
+</div>
+<div class="pricing-card" data-aos="zoom-in" data-aos-duration="800">
+<div class="label">Valor especial da Turma 1</div>
+<div class="price"><span>R$</span> 997<span>,00</span></div>
+<p class="price-desc">Condição especial para a primeira turma. Valor diferenciado por ser a turma fundadora. Forme um grupo seleto com formação muito acima do valor cobrado.</p>
+<div class="pricing-features">
+<span class="pricing-feat"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> 7 encontros ao vivo</span>
+<span class="pricing-feat"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Conteúdo prático</span>
+<span class="pricing-feat"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Gravações inclusas</span>
+<span class="pricing-feat"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Certificado</span>
+<span class="pricing-feat"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Turma reduzida</span>
+</div>
+<a href="https://forms.gle/QnGe2UGKEqsDuRyn9" class="btn btn-green">Quero participar da Turma 1</a>
+</div>
+</div>
+</section>
+
+<section class="section faq-section" id="faq">
+<div class="container">
+<div data-aos="fade-up" style="text-align:center">
+<span class="section-label">FAQ</span>
+<h2 class="section-title">Perguntas <span>Frequentes</span></h2>
+</div>
+<div class="faq-grid">
+<div class="faq-item" data-aos="fade-up"><h4>Preciso já trabalhar no agro para participar?</h4><p>Não. A formação também é voltada para quem quer entrar no agro ou migrar para áreas comerciais.</p></div>
+<div class="faq-item" data-aos="fade-up" data-aos-delay="100"><h4>O curso é muito técnico?</h4><p>Ele é técnico na medida certa, com linguagem simples e prática.</p></div>
+<div class="faq-item" data-aos="fade-up" data-aos-delay="200"><h4>Vou aprender hedge e bolsa?</h4><p>Sim, com foco introdutório e aplicado à comercialização.</p></div>
+<div class="faq-item" data-aos="fade-up" data-aos-delay="300"><h4>Serve para quem trabalha com insumos?</h4><p>Sim. Quem trabalha com insumos ganha muito ao entender grãos e barter.</p></div>
+<div class="faq-item" data-aos="fade-up" data-aos-delay="400"><h4>A turma será gravada?</h4><p>Sim, as gravações serão disponibilizadas por tempo limitado.</p></div>
+<div class="faq-item" data-aos="fade-up" data-aos-delay="500"><h4>Tem certificado?</h4><p>Sim, certificado de participação para quem concluir a formação.</p></div>
+</div>
+</div>
+</section>
+
+<section class="final-cta">
+<div class="container" data-aos="fade-up">
+<h2>O agro precisa de profissionais que entendam mais do que produto. Precisa de gente que <span style="color:var(--gold)">entenda mercado</span>.</h2>
+<p>Se você quer entrar, migrar ou crescer na área comercial do agro, o Método ORIGEM pode ser o seu ponto de partida. A Turma 1 será pequena, próxima e com valor especial de lançamento.</p>
+<a href="https://w.app/metodoorigem" class="btn btn-wpp">
+<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+Falar no WhatsApp e validar minha vaga
+</a>
+</div>
+</section>
+
+<div class="disclaimer">
+<div class="container">
+O Método ORIGEM não promete emprego imediato, promoção automática ou resultado financeiro garantido. A proposta é entregar conhecimento prático, visão de mercado e repertório profissional.
+</div>
+</div>
+
+<footer>
+<div class="container">
+<p>&copy; 2026 Método ORIGEM. Todos os direitos reservados.</p>
+<div class="social">
+<a href="http://www.facebook.com" target="_blank">Facebook</a>
+<a href="http://www.instagram.com" target="_blank">Instagram</a>
+<a href="http://www.youtube.com" target="_blank">YouTube</a>
+<a href="http://www.linkedin.com" target="_blank">LinkedIn</a>
+</div>
+<p style="font-size:0.75rem;opacity:0.5">Uma formação prática para quem quer entender a comercialização agrícola de verdade.</p>
+</div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({once:true,offset:80,duration:800});
+const header=document.getElementById('header');
+window.addEventListener('scroll',()=>{header.classList.toggle('scrolled',window.scrollY>60)});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const h=a.getAttribute('href');if(h!=='#'){e.preventDefault();document.querySelector(h).scrollIntoView({behavior:'smooth'})}})});
+</script>
+</body>
+</html>
