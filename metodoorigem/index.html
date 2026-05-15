@@ -38,6 +38,7 @@ img{max-width:100%;height:auto}
 .btn-wpp svg,.btn-green svg,.btn-gold svg{width:22px;height:22px;fill:currentColor}
 header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:15px 0;transition:var(--tr);background:rgba(31,77,58,0.92);backdrop-filter:blur(4px)}
 header.scrolled{background:rgba(31,77,58,0.95);backdrop-filter:blur(20px);padding:10px 0;box-shadow:0 4px 30px rgba(0,0,0,0.1)}
+header.header-hidden{transform:translateY(-120%)}
 .header-inner{display:flex;align-items:center;justify-content:space-between}
 .logo{display:flex;align-items:center}
 .logo img{height:132px;width:auto;display:block;filter:drop-shadow(0 8px 20px rgba(0,0,0,0.18))}
@@ -193,6 +194,9 @@ footer .social{display:flex;justify-content:center;gap:20px;margin:20px 0}
 footer .social a{color:rgba(255,255,255,0.5);font-size:0.9rem;transition:var(--tr)}
 footer .social a:hover{color:var(--gold)}
 footer p{font-size:0.85rem}
+.wa-float{position:fixed;right:18px;bottom:18px;z-index:1200;display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:12px 16px;border-radius:999px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.86rem;box-shadow:0 12px 28px rgba(0,0,0,.24);transition:var(--tr)}
+.wa-float:hover{transform:translateY(-3px);box-shadow:0 18px 34px rgba(0,0,0,.28)}
+.wa-float svg{width:18px;height:18px;fill:currentColor}
 @media(max-width:900px){
 .hero-content,.problem-grid,.mentor-grid{grid-template-columns:1fr}
 .hero-right{display:flex}
@@ -214,15 +218,27 @@ footer p{font-size:0.85rem}
 }
 @media(max-width:600px){
 .section{padding:60px 0}
-.hero-left h1{font-size:1.8rem}
+.logo img{height:62px}
+.hero-left h1{font-size:1.42rem;line-height:1.2;letter-spacing:-.2px}
 .container{padding:0 16px}
-.hero-content{gap:26px;padding:118px 0 70px}
-.hero-left p{font-size:.98rem;line-height:1.6}
+.hero-content{gap:18px;padding:96px 0 56px}
+.hero-left p{font-size:.93rem;line-height:1.55;margin-bottom:20px}
 .hero-photo{max-width:100%}
-.btn{width:100%;justify-content:center;padding:14px 18px;font-size:.95rem}
-.hero-urgency{font-size:.8rem;line-height:1.5}
-.pricing-card{padding:30px 20px}
-.pricing-card .price{font-size:3rem}
+.btn{width:100%;justify-content:center;padding:13px 16px;font-size:.93rem;border-radius:14px}
+.hero-urgency{font-size:.76rem;line-height:1.45;margin-top:10px}
+.section-label{font-size:.66rem;letter-spacing:2px}
+.section-title{font-size:1.36rem;line-height:1.22;margin-bottom:10px}
+.section-sub{font-size:.92rem;line-height:1.55}
+.audience-col,.diff-card,.format-item,.faq-item,.whatis-item,.transform-card{padding:18px}
+.module{padding:16px;gap:10px}
+.module-num{width:36px;height:36px;font-size:.86rem}
+.pricing-card{padding:22px 14px;border-radius:14px}
+.pricing-card .price{font-size:2.35rem;line-height:1}
+.pricing-feat{font-size:.82rem}
+.final-cta{padding:68px 0}
+.final-cta p{font-size:.93rem;line-height:1.55}
+.hero-scroll{display:none}
+.wa-float{right:12px;bottom:12px;padding:11px 13px;font-size:.8rem}
 }
 </style>
 </head>
@@ -546,11 +562,25 @@ O Método ORIGEM não promete emprego imediato, promoção automática ou result
 </div>
 </footer>
 
+<a class="wa-float" href="https://w.app/metodoorigem" target="_blank" rel="noopener noreferrer" aria-label="Fale Conosco no WhatsApp">
+<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+Fale Conosco
+</a>
+
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
 AOS.init({once:true,offset:80,duration:800});
 const header=document.getElementById('header');
 window.addEventListener('scroll',()=>{header.classList.toggle('scrolled',window.scrollY>60)});
+let lastScrollY=window.scrollY;
+window.addEventListener('scroll',()=>{
+const isMobile=window.matchMedia('(max-width: 600px)').matches;
+if(!isMobile){header.classList.remove('header-hidden');lastScrollY=window.scrollY;return;}
+const currentY=window.scrollY;
+if(currentY>lastScrollY && currentY>120){header.classList.add('header-hidden');}
+else{header.classList.remove('header-hidden');}
+lastScrollY=currentY;
+});
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const h=a.getAttribute('href');if(h!=='#'){const target=document.querySelector(h);if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'})}}})});
 </script>
 </body>
