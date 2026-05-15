@@ -40,7 +40,7 @@ header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:15px 0;transi
 header.scrolled{background:rgba(31,77,58,0.95);backdrop-filter:blur(20px);padding:10px 0;box-shadow:0 4px 30px rgba(0,0,0,0.1)}
 .header-inner{display:flex;align-items:center;justify-content:space-between}
 .logo{display:flex;align-items:center}
-.logo img{height:52px;width:auto;display:block;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.18))}
+.logo img{height:52px;width:auto;display:block;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.18));background:#fff;border-radius:8px;padding:4px}
 .nav-links{display:flex;gap:30px;align-items:center}
 .nav-links a{color:rgba(255,255,255,0.8);font-size:0.9rem;font-weight:500;transition:var(--tr);position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);transition:var(--tr)}
@@ -74,19 +74,6 @@ header.scrolled{background:rgba(31,77,58,0.95);backdrop-filter:blur(20px);paddin
 .hero-badge{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);font-size:0.85rem}
 .hero-badge svg{width:16px;height:16px;fill:var(--gold)}
 .hero-urgency{color:var(--gold);font-size:0.85rem;margin-top:15px;font-weight:500;display:flex;align-items:center;gap:8px}
-.hero-right{display:flex;justify-content:center;align-items:center;perspective:1200px}
-.hero-card{position:relative;width:100%;max-width:420px;aspect-ratio:4/5;border-radius:20px;overflow:hidden;transform:rotateY(-8deg) rotateX(6deg);transition:var(--tr);box-shadow:0 30px 80px rgba(0,0,0,0.35);background:radial-gradient(circle at 20% 20%,#ffffff22 0%,transparent 35%),linear-gradient(160deg,#113427 0%,#1f4d3a 48%,#2d7a5a 100%)}
-.hero-card:hover{transform:rotateY(-2deg) rotateX(1deg) translateY(-6px)}
-.hero-card-3d{position:absolute;inset:0;transform-style:preserve-3d}
-.grain-sphere{position:absolute;border-radius:50%;background:radial-gradient(circle at 30% 30%,#f9ecd6 0%,#e8c994 38%,#b08d57 100%);box-shadow:inset -10px -16px 24px rgba(70,38,4,0.35),0 20px 32px rgba(0,0,0,0.25);animation:float3d 7s ease-in-out infinite}
-.grain-sphere.s1{width:150px;height:150px;left:34px;top:42px;transform:translateZ(42px)}
-.grain-sphere.s2{width:98px;height:98px;right:44px;top:112px;transform:translateZ(72px);animation-delay:.8s}
-.grain-sphere.s3{width:72px;height:72px;left:170px;bottom:82px;transform:translateZ(98px);animation-delay:1.4s}
-.field-ring{position:absolute;left:22px;right:22px;bottom:30px;height:86px;border-radius:999px;background:linear-gradient(180deg,#6fb38d 0%,#2d7a5a 100%);transform:translateZ(28px) rotateX(70deg);box-shadow:0 22px 30px rgba(0,0,0,0.28)}
-.hero-card .overlay{position:absolute;bottom:0;left:0;width:100%;padding:24px;background:linear-gradient(transparent,rgba(0,0,0,0.78));color:var(--white)}
-.hero-card .overlay h3{font-size:1.1rem;margin-bottom:4px}
-.hero-card .overlay p{font-size:0.85rem;opacity:0.86}
-@keyframes float3d{0%,100%{transform:translateZ(50px) translateY(0)}50%{transform:translateZ(74px) translateY(-10px)}}
 .hero-scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,0.5);font-size:0.75rem;animation:bounce-scroll 2s infinite}
 .hero-scroll .mouse{width:24px;height:38px;border:2px solid rgba(255,255,255,0.3);border-radius:12px;position:relative}
 .hero-scroll .mouse::after{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:4px;height:8px;background:var(--gold);border-radius:2px;animation:scroll-dot 2s infinite}
@@ -232,7 +219,7 @@ footer p{font-size:0.85rem}
 
 <header id="header">
 <div class="container header-inner">
-<div class="logo"><img src="logo-metodo-origem.png" alt="Logo Método Origem"></div>
+<div class="logo"><img src="./logo-metodo-origem.png" alt="Logo Método Origem"></div>
 <nav class="nav-links">
 <a href="#problema">Problema</a>
 <a href="#audiencia">Para quem é</a>
@@ -266,20 +253,6 @@ Quero saber se essa turma é para mim
 <div class="hero-urgency">
 <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
 Turma 1 com vagas limitadas. Atendimento direto para validar sua participação.
-</div>
-</div>
-<div class="hero-right" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
-<div class="hero-card">
-<div class="hero-card-3d" aria-hidden="true">
-<div class="grain-sphere s1"></div>
-<div class="grain-sphere s2"></div>
-<div class="grain-sphere s3"></div>
-<div class="field-ring"></div>
-</div>
-<div class="overlay">
-<h3>Comercialização em 3D</h3>
-<p>Originação, risco e negociação em uma visão integrada e prática</p>
-</div>
 </div>
 </div>
 </div>
@@ -454,7 +427,7 @@ Turma 1 com vagas limitadas. Atendimento direto para validar sua participação.
 </div>
 <div class="mentor-grid">
 <div class="mentor-img" data-aos="fade-right">
-<img src="foto-metodo-origem.png" alt="Cristiano Grade - Profissional do Agronegócio">
+<img src="./foto-metodo-origem.png" alt="Cristiano Grade - Profissional do Agronegócio">
 </div>
 <div data-aos="fade-left">
 <h3 style="font-size:1.8rem;margin-bottom:8px;color:var(--green-deep)">Cristiano Grade</h3>
