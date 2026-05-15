@@ -14,7 +14,7 @@
 --beige:#D8C3A5;
 --beige-light:#E8D9C8;
 --off-white:#F5F3EE;
---gold:#B08D57;
+--gold:#F4C542;
 --graphite:#2F2F2F;
 --white:#FFFFFF;
 --shadow:0 10px 40px rgba(0,0,0,0.08);
@@ -40,7 +40,7 @@ header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:15px 0;transi
 header.scrolled{background:rgba(31,77,58,0.95);backdrop-filter:blur(20px);padding:10px 0;box-shadow:0 4px 30px rgba(0,0,0,0.1)}
 .header-inner{display:flex;align-items:center;justify-content:space-between}
 .logo{display:flex;align-items:center}
-.logo img{height:92px;width:auto;display:block;filter:drop-shadow(0 8px 20px rgba(0,0,0,0.18))}
+.logo img{height:132px;width:auto;display:block;filter:drop-shadow(0 8px 20px rgba(0,0,0,0.18))}
 .nav-links{display:flex;gap:30px;align-items:center}
 .nav-links a{color:rgba(255,255,255,0.8);font-size:0.9rem;font-weight:500;transition:var(--tr);position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);transition:var(--tr)}
@@ -74,6 +74,9 @@ header.scrolled{background:rgba(31,77,58,0.95);backdrop-filter:blur(20px);paddin
 .hero-badge{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);font-size:0.85rem}
 .hero-badge svg{width:16px;height:16px;fill:var(--gold)}
 .hero-urgency{color:var(--gold);font-size:0.85rem;margin-top:15px;font-weight:500;display:flex;align-items:center;gap:8px}
+.hero-right{display:flex;justify-content:center}
+.hero-photo{width:100%;max-width:430px;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.28);border:2px solid rgba(255,255,255,.24)}
+.hero-photo img{display:block;width:100%;height:100%;object-fit:cover}
 .hero-scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,0.5);font-size:0.75rem;animation:bounce-scroll 2s infinite}
 .hero-scroll .mouse{width:24px;height:38px;border:2px solid rgba(255,255,255,0.3);border-radius:12px;position:relative}
 .hero-scroll .mouse::after{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:4px;height:8px;background:var(--gold);border-radius:2px;animation:scroll-dot 2s infinite}
@@ -245,7 +248,6 @@ footer p{font-size:0.85rem}
 <div class="container hero-content">
 <div class="hero-left" data-aos="fade-right" data-aos-duration="1000">
 <div class="hero-badges">
-<div class="hero-badge"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Turma 1 - Vagas Limitadas</div>
 <div class="hero-badge"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Início 18/06/2026</div>
 </div>
 <h1>Entre no agro <span>pela porta certa</span></h1>
@@ -255,8 +257,12 @@ footer p{font-size:0.85rem}
 Quero saber se essa turma é para mim
 </a>
 <div class="hero-urgency">
-<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
 Turma 1 com vagas limitadas. Atendimento direto para validar sua participação.
+</div>
+</div>
+<div class="hero-right" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+<div class="hero-photo">
+<img src="https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?auto=format&fit=crop&w=900&q=80" alt="Produtor rural no campo">
 </div>
 </div>
 </div>
