@@ -36,7 +36,7 @@ header{position:fixed;top:0;left:0;width:100%;z-index:100;padding:14px 24px;back
 @keyframes scroll-field{0%{background-position:0 0}100%{background-position:-240px 0}}
 
 .combine-drive{position:absolute;bottom:30px;z-index:2;font-size:clamp(2rem,4vw,3.2rem);filter:drop-shadow(0 6px 20px rgba(0,0,0,.5));animation:combine-cross 7s ease-in-out infinite;pointer-events:none}
-@keyframes combine-cross{0%{left:calc(100% + 70px);opacity:0}8%{opacity:1}42%{left:-70px;opacity:1}50%{left:-70px;opacity:0}100%{left:calc(100% + 70px);opacity:0}}
+@keyframes combine-cross{0%{left:calc(100% + 70px);opacity:0}8%{opacity:1}38%{left:-70px;opacity:1}46%{left:-70px;opacity:0}100%{left:calc(100% + 70px);opacity:0}}
 
 .crop-overlay{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;z-index:3}
 .crop-fade{position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(
@@ -48,7 +48,6 @@ header{position:fixed;top:0;left:0;width:100%;z-index:100;padding:14px 24px;back
 );z-index:2;pointer-events:none}
 
 .construction-sign{position:relative;z-index:3;text-align:center;animation:fade-glow 3s ease-in-out infinite}
-.construction-sign .icon-sign{font-size:clamp(2rem,5vw,4rem);display:block;margin-bottom:6px;filter:drop-shadow(0 4px 20px rgba(0,0,0,.5))}
 .construction-sign h2{font-family:'Georgia',serif;font-size:clamp(1.8rem,5vw,3.6rem);font-weight:700;color:#d4c4a0;letter-spacing:8px;text-shadow:0 4px 30px rgba(0,0,0,.6),0 0 60px rgba(212,196,160,.1)}
 .construction-sign h2 span{color:#7daa5a}
 .construction-sign p{font-size:clamp(.7rem,1.2vw,.9rem);color:rgba(212,196,160,.4);letter-spacing:4px;text-transform:uppercase;margin-top:8px;text-shadow:0 2px 20px rgba(0,0,0,.5)}
@@ -72,19 +71,38 @@ header{position:fixed;top:0;left:0;width:100%;z-index:100;padding:14px 24px;back
 .icon:hover img{filter:brightness(0) invert(.9)}
 .contact-note{color:rgba(255,255,255,.25);font-size:.75rem;margin-top:30px;letter-spacing:1px}
 
+@media(max-width:900px){
+.btn-origem svg{display:none}
+}
 @media(max-width:600px){
-header{padding:12px 16px}
-.logo{font-size:1.1rem}
-.btn-origem{padding:8px 16px;font-size:.78rem}
-.hero{padding:20px 12px;margin-top:60px}
-.crop-bg{height:200px;border-radius:14px}
-.crop-scene{margin-bottom:24px;border-radius:14px}
-.crop-fade{background:radial-gradient(ellipse 250px 140px at 50% 50%,rgba(26,42,26,0) 0%,rgba(26,42,26,.3) 40%,rgba(26,42,26,.7) 65%,rgba(26,42,26,1) 100%)}
-.combine-drive{font-size:clamp(1.4rem,6vw,2rem);bottom:20px}
-.construction-sign h2{letter-spacing:4px}
-.contact-section{padding:30px 16px 50px}
-.icon{width:56px;height:56px}
-.icon img{width:24px;height:24px}
+header{padding:10px 12px}
+.logo{font-size:1rem}
+.btn-origem{padding:7px 14px;font-size:.72rem;white-space:nowrap}
+.hero{padding:14px 10px;margin-top:54px}
+.crop-scene{margin-bottom:20px;border-radius:12px}
+.crop-bg{height:180px;border-radius:12px}
+.crop-fade{background:radial-gradient(ellipse 220px 120px at 50% 50%,rgba(26,42,26,0) 0%,rgba(26,42,26,.3) 40%,rgba(26,42,26,.7) 65%,rgba(26,42,26,1) 100%)}
+.combine-drive{font-size:clamp(1.6rem,7vw,2.2rem);bottom:14px}
+@keyframes combine-cross{0%{left:calc(100% + 50px);opacity:0}8%{opacity:1}38%{left:-50px;opacity:1}46%{left:-50px;opacity:0}100%{left:calc(100% + 50px);opacity:0}}
+.construction-sign h2{font-size:clamp(1.3rem,7vw,2rem);letter-spacing:3px}
+.construction-sign p{font-size:.65rem;letter-spacing:2px}
+.tagline h1{font-size:clamp(1.3rem,6vw,1.8rem)}
+.tagline p{font-size:.75rem}
+.crop-line{height:4px}
+.contact-section{padding:24px 14px 40px}
+.contact-section h3{font-size:.6rem;margin-bottom:16px}
+.links{gap:16px}
+.icon{width:50px;height:50px}
+.icon img{width:22px;height:22px}
+}
+@media(max-width:380px){
+header{padding:8px 10px}
+.logo{font-size:.9rem}
+.btn-origem{padding:6px 10px;font-size:.65rem}
+.crop-bg{height:150px}
+.crop-fade{background:radial-gradient(ellipse 170px 90px at 50% 50%,rgba(26,42,26,0) 0%,rgba(26,42,26,.3) 40%,rgba(26,42,26,.7) 65%,rgba(26,42,26,1) 100%)}
+.combine-drive{font-size:1.4rem;bottom:10px}
+.construction-sign h2{font-size:1.1rem;letter-spacing:2px}
 }
 </style>
 </head>
