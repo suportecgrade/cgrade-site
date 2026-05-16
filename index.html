@@ -35,7 +35,10 @@ header{position:fixed;top:0;left:0;width:100%;z-index:100;padding:14px 24px;back
 
 @keyframes scroll-field{0%{background-position:0 0}100%{background-position:-240px 0}}
 
-.crop-overlay{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;z-index:2}
+.combine-drive{position:absolute;bottom:30px;z-index:2;font-size:clamp(2rem,4vw,3.2rem);filter:drop-shadow(0 6px 20px rgba(0,0,0,.5));animation:combine-cross 7s ease-in-out infinite;pointer-events:none}
+@keyframes combine-cross{0%{left:-70px;opacity:0}8%{opacity:1}42%{left:calc(100% + 10px);opacity:1}50%{left:calc(100% + 10px);opacity:0}100%{left:-70px;opacity:0}}
+
+.crop-overlay{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;z-index:3}
 .crop-fade{position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(
   ellipse 400px 200px at 50% 50%,
   rgba(26,42,26,0) 0%,
@@ -77,6 +80,7 @@ header{padding:12px 16px}
 .crop-bg{height:200px;border-radius:14px}
 .crop-scene{margin-bottom:24px;border-radius:14px}
 .crop-fade{background:radial-gradient(ellipse 250px 140px at 50% 50%,rgba(26,42,26,0) 0%,rgba(26,42,26,.3) 40%,rgba(26,42,26,.7) 65%,rgba(26,42,26,1) 100%)}
+.combine-drive{font-size:clamp(1.4rem,6vw,2rem);bottom:20px}
 .construction-sign h2{letter-spacing:4px}
 .contact-section{padding:30px 16px 50px}
 .icon{width:56px;height:56px}
@@ -98,6 +102,7 @@ Conheça o Método ORIGEM
 <div class="crop-scene">
 <div class="crop-bg"></div>
 <div class="crop-fade"></div>
+<div class="combine-drive">🚜</div>
 <div class="crop-overlay">
 <div class="construction-sign">
 <span class="icon-sign">🚜</span>
