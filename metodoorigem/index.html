@@ -72,6 +72,8 @@ header.header-hidden{transform:translateY(-120%)}
 100%{transform:translateY(-10vh) rotate(720deg);opacity:0}
 }
 .hero-content{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:120px 0 80px}
+.hero-right{grid-column:2;grid-row:1}
+.hero-left{grid-column:1;grid-row:1}
 .hero-left h1{font-size:clamp(2rem,4vw,3.8rem);color:var(--white);line-height:1.15;margin-bottom:20px}
 .hero-left h1 span{color:var(--gold)}
 .hero-left p{font-size:clamp(1rem,1.5vw,1.15rem);color:rgba(255,255,255,0.8);line-height:1.7;margin-bottom:30px;max-width:520px}
@@ -194,7 +196,8 @@ footer p{font-size:0.85rem}
 .wa-float svg{width:18px;height:18px;fill:currentColor}
 @media(max-width:900px){
 .hero-content,.problem-grid,.mentor-grid{grid-template-columns:1fr}
-.hero-right{display:flex}
+.hero-right{grid-column:1;grid-row:1;display:flex}
+.hero-left{grid-column:1;grid-row:2}
 .hero-photo{max-width:360px;margin:0 auto}
 .hero-scroll{bottom:20px}
 .nav-links{display:none}
@@ -204,14 +207,15 @@ footer p{font-size:0.85rem}
 }
 @media(max-width:600px){
 .section{padding:60px 0}
-.logo img{height:62px}
-.hero-left h1{font-size:1.42rem;line-height:1.2;letter-spacing:-.2px}
-.container{padding:0 16px}
-.hero-content{gap:18px;padding:96px 0 56px}
-.hero-left p{font-size:.93rem;line-height:1.55;margin-bottom:20px}
-.hero-photo{max-width:100%}
-.btn{width:100%;justify-content:center;padding:13px 16px;font-size:.93rem;border-radius:14px}
-.hero-urgency{font-size:.76rem;line-height:1.45;margin-top:10px}
+.logo img{height:52px}
+.hero-left h1{font-size:1.5rem;line-height:1.2;letter-spacing:-.2px}
+.hero .container{padding:0}
+.hero-content{gap:10px;padding:80px 0 40px}
+.hero-left{padding:0 16px}
+.hero-left p{font-size:.93rem;line-height:1.55;margin-bottom:16px}
+.hero-photo{border-radius:0;max-width:100%;border:none;box-shadow:none}
+.btn{width:100%;justify-content:center;padding:14px 16px;font-size:.95rem;border-radius:12px}
+.hero-urgency{font-size:.8rem;line-height:1.45;margin-top:10px;padding:0 16px}
 .section-label{font-size:.66rem;letter-spacing:2px}
 .section-title{font-size:1.36rem;line-height:1.22;margin-bottom:10px}
 .section-sub{font-size:.92rem;line-height:1.55}
@@ -253,6 +257,11 @@ footer p{font-size:0.85rem}
 <div class="hero-particle"></div><div class="hero-particle"></div>
 </div>
 <div class="container hero-content">
+<div class="hero-right" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+<div class="hero-photo">
+<img src="./Produtorimg.png" alt="Profissional do agronegócio em campo">
+</div>
+</div>
 <div class="hero-left" data-aos="fade-right" data-aos-duration="1000">
 <h1>Entre no agro <span>pela porta certa</span></h1>
 <p>Uma formação direta para quem quer entender originação, barter, compra e venda de grãos, gestão de risco e relacionamento comercial no agro &mdash; com a visão de quem viveu o mercado na prática.</p>
@@ -262,11 +271,6 @@ Quero saber se essa turma é para mim
 </a>
 <div class="hero-urgency">
 Turma 1 com vagas limitadas. Atendimento direto para validar sua participação.
-</div>
-</div>
-<div class="hero-right" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
-<div class="hero-photo">
-<img src="./Produtorimg.png" alt="Profissional do agronegócio em campo">
 </div>
 </div>
 </div>
