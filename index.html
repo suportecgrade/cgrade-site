@@ -1,130 +1,133 @@
 <!DOCTYPE html>
-
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>C.Grade</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C.Grade — Agronegócio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#1a2a1a;color:#fff;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
+a{text-decoration:none;color:inherit}
+header{position:fixed;top:0;left:0;width:100%;z-index:100;padding:14px 24px;background:rgba(26,42,26,.92);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06)}
+.logo{font-family:'Georgia',serif;font-size:1.3rem;font-weight:700;letter-spacing:1px;color:#d4c4a0}
+.logo span{color:#7daa5a}
+.btn-origem{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;background:linear-gradient(135deg,#7daa5a,#5a8a3a);color:#fff;border-radius:50px;font-weight:600;font-size:.85rem;transition:all .3s;border:none;cursor:pointer}
+.btn-origem:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(125,170,90,.35)}
+.btn-origem svg{width:16px;height:16px;fill:currentColor}
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #ffffff;
-      color: #333;
-      text-align: center;
-    }
+.harvest-section{flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:70px;padding:40px 24px;position:relative;overflow:hidden}
+.scene-wrap{width:100%;max-width:1100px;margin:0 auto 60px;position:relative}
+.scene-label{text-align:center;font-size:.7rem;text-transform:uppercase;letter-spacing:4px;color:rgba(212,196,160,.5);margin-bottom:20px}
+.crop-field{position:relative;width:100%;height:260px;border-radius:20px;overflow:hidden;background:linear-gradient(180deg,#3a5a2a 0%,#5a8a3a 20%,#8ab85a 40%,#c4a85a 55%,#d4b86a 70%,#a08040 100%);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.crop-field::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(0,0,0,.04) 40px,rgba(0,0,0,.04) 41px);pointer-events:none}
+.crop-field::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 16px,rgba(0,0,0,.06) 16px,rgba(0,0,0,.06) 17px);pointer-events:none}
 
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 50px 20px;
-    }
+.harvest-trail{position:absolute;top:0;left:0;height:100%;background:linear-gradient(180deg,#2a1a0a 0%,#3a2a1a 20%,#5a3a2a 40%,#6a4a2a 60%,#5a3a1a 80%,#3a2a0a 100%);transition:width .15s linear;overflow:hidden;display:flex;align-items:center;border-radius:20px 0 0 20px}
+.harvest-trail::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(0,0,0,.08) 40px,rgba(0,0,0,.08) 41px);pointer-events:none}
+.harvest-trail::after{content:'EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO';position:absolute;top:50%;left:0;font-size:clamp(.9rem,2.5vw,1.5rem);font-weight:900;letter-spacing:6px;text-transform:uppercase;color:rgba(212,196,160,.15);white-space:nowrap;transform:translateY(-50%);animation:trail-text 3s linear infinite;pointer-events:none;font-family:'Georgia',serif}
 
-    .hero {
-      width: 100%;
-      max-width: 420px;
-      border-radius: 12px;
-      margin-bottom: 30px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
-    }
+@keyframes trail-text{0%{transform:translateY(-50%) translateX(0)}100%{transform:translateY(-50%) translateX(-50%)}}
 
-    h1 {
-      margin: 0 0 12px;
-      font-size: 30px;
-      color: #2f3a2f;
-    }
+.combine{position:absolute;top:50%;z-index:10;font-size:clamp(2.4rem,5vw,3.6rem);transform:translate(-50%,-50%);filter:drop-shadow(0 8px 20px rgba(0,0,0,.4));animation:combine-drive 4s ease-in-out infinite;will-change:left}
+@keyframes combine-drive{0%{left:-80px}45%{left:calc(100% + 80px)}55%{left:calc(100% + 80px)}100%{left:-80px}}
 
-    p {
-      margin: 0 0 32px;
-      font-size: 16px;
-      color: #666;
-    }
+.combine-shadow{position:absolute;bottom:20px;z-index:9;width:50px;height:14px;background:rgba(0,0,0,.2);border-radius:50%;filter:blur(6px);animation:shadow-drive 4s ease-in-out infinite}
+@keyframes shadow-drive{0%{left:-60px;opacity:0}10%{opacity:1}45%{left:calc(100% + 60px);opacity:1}55%{left:calc(100% + 60px);opacity:0}100%{left:-60px;opacity:0}}
 
-    .links {
-      display: flex;
-      justify-content: center;
-      gap: 28px;
-      flex-wrap: wrap;
-    }
+.effects{position:absolute;top:40%;z-index:11;font-size:clamp(.6rem,1.2vw,.85rem);color:rgba(255,255,255,.3);pointer-events:none;animation:particles 4s ease-in-out infinite;display:flex;gap:2px}
+@keyframes particles{0%{left:-60px;opacity:0}12%{opacity:1;transform:translateY(0)}40%{left:calc(100% + 40px);opacity:1}48%{opacity:0;transform:translateY(-20px)}100%{left:-60px;opacity:0}}
 
-    .icon {
-      width: 74px;
-      height: 74px;
-      border-radius: 50%;
-      background: #f5f5f5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
-      transition: transform 0.2s ease, background 0.2s ease;
-      text-decoration: none;
-    }
+.tagline{text-align:center;margin-top:10px}
+.tagline h1{font-family:'Georgia',serif;font-size:clamp(1.6rem,4vw,2.8rem);font-weight:400;color:#d4c4a0;letter-spacing:2px}
+.tagline h1 span{color:#7daa5a;font-weight:700}
+.tagline p{color:rgba(212,196,160,.5);font-size:clamp(.8rem,1.2vw,1rem);margin-top:8px;letter-spacing:1px}
 
-    .icon:hover {
-      transform: translateY(-4px);
-      background: #ececec;
-    }
+.contact-section{padding:40px 24px 60px;text-align:center;border-top:1px solid rgba(255,255,255,.05)}
+.contact-section h3{font-size:.7rem;text-transform:uppercase;letter-spacing:4px;color:rgba(212,196,160,.4);margin-bottom:24px}
+.links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.icon{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;transition:all .3s;border:1px solid rgba(255,255,255,.08)}
+.icon:hover{transform:translateY(-4px);background:rgba(125,170,90,.2);border-color:#7daa5a}
+.icon img{width:28px;height:28px;object-fit:contain;filter:brightness(0) invert(.7);transition:filter .3s}
+.icon:hover img{filter:brightness(0) invert(.9)}
+.contact-note{color:rgba(255,255,255,.25);font-size:.75rem;margin-top:30px;letter-spacing:1px}
 
-    .icon img {
-      width: 34px;
-      height: 34px;
-      object-fit: contain;
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 40px 16px;
-      }
-
-      .hero {
-        max-width: 100%;
-      }
-
-      h1 {
-        font-size: 26px;
-      }
-
-      .links {
-        gap: 20px;
-      }
-
-      .icon {
-        width: 68px;
-        height: 68px;
-      }
-
-      .icon img {
-        width: 30px;
-        height: 30px;
-      }
-    }
-  </style>
-
+@media(max-width:600px){
+header{padding:12px 16px}
+.logo{font-size:1.1rem}
+.btn-origem{padding:8px 16px;font-size:.78rem}
+.harvest-section{padding:20px 12px;margin-top:60px}
+.crop-field{height:180px;border-radius:14px}
+.scene-wrap{margin-bottom:40px}
+.contact-section{padding:30px 16px 50px}
+.icon{width:56px;height:56px}
+.icon img{width:24px;height:24px}
+.combine-shadow{width:34px;height:10px}
+}
+</style>
 </head>
 <body>
-  <div class="container">
-    <img src="hero.png" alt="C.Grade" class="hero">
 
+<header>
+<div class="logo">C.<span>Grade</span></div>
+<a href="/metodoorigem/" class="btn-origem">
+<svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+Conheça o Método ORIGEM
+</a>
+</header>
 
-<p>Em breve novidades no agronegócio 🚜</p>
-<h3>Fale Conosco!</h3>
-
-<div class="links">
-  <a href="https://wa.me/5542988471259" target="_blank" class="icon" aria-label="WhatsApp">
-    <img src="telefone.png" alt="WhatsApp">
-  </a>
-
-  <a href="mailto:contato@cgrade.com.br" class="icon" aria-label="Email">
-    <img src="email.png" alt="Email">
-  </a>
-
-  <a href="https://www.linkedin.com/in/cristianograde/" target="_blank" class="icon" aria-label="LinkedIn">
-    <img src="linkedin.png" alt="LinkedIn">
-  </a>
+<section class="harvest-section">
+<div class="scene-wrap">
+<div class="scene-label">.— Safra em desenvolvimento —.</div>
+<div class="crop-field">
+<div class="harvest-trail" id="trail"></div>
+<div class="combine" id="combine">🚜</div>
+<div class="combine-shadow" id="shadow"></div>
+<div class="effects" id="particles">✦ ✦ ✦</div>
 </div>
+<div class="tagline">
+<h1><span>C.</span>Grade</h1>
+<p>Em breve, uma nova forma de enxergar o agro</p>
+</div>
+</div>
+</section>
 
+<section class="contact-section">
+<h3>Fale Conosco</h3>
+<div class="links">
+<a href="https://wa.me/5542988471259" target="_blank" class="icon" aria-label="WhatsApp"><img src="telefone.png" alt="WhatsApp"></a>
+<a href="mailto:contato@cgrade.com.br" class="icon" aria-label="Email"><img src="email.png" alt="Email"></a>
+<a href="https://www.linkedin.com/in/cristianograde/" target="_blank" class="icon" aria-label="LinkedIn"><img src="linkedin.png" alt="LinkedIn"></a>
+</div>
+<p class="contact-note">contato@cgrade.com.br</p>
+</section>
 
-  </div>
+<script>
+const trail=document.getElementById('trail');
+const combine=document.getElementById('combine');
+const shadow=document.getElementById('shadow');
+const particles=document.getElementById('particles');
+const field=document.querySelector('.crop-field');
+let startTime=null;
+const cycleDuration=4000;
+
+function updateTrail(){
+const now=performance.now();
+if(!startTime)startTime=now;
+const elapsed=(now-startTime)%cycleDuration;
+const progress=elapsed/cycleDuration;
+let pct;
+if(progress<.45){
+pct=progress/.45;
+}else if(progress<.55){
+pct=1;
+}else{
+pct=1-(progress-.55)/.45;
+}
+const w=Math.max(0,Math.min(100,pct*100));
+trail.style.width=w+'%';
+requestAnimationFrame(updateTrail);
+}
+updateTrail();
+</script>
 </body>
 </html>
