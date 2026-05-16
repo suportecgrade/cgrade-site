@@ -15,27 +15,45 @@ header{position:fixed;top:0;left:0;width:100%;z-index:100;padding:14px 24px;back
 .btn-origem:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(125,170,90,.35)}
 .btn-origem svg{width:16px;height:16px;fill:currentColor}
 
-.harvest-section{flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:70px;padding:40px 24px;position:relative;overflow:hidden}
-.scene-wrap{width:100%;max-width:1100px;margin:0 auto 60px;position:relative}
-.scene-label{text-align:center;font-size:.7rem;text-transform:uppercase;letter-spacing:4px;color:rgba(212,196,160,.5);margin-bottom:20px}
-.crop-field{position:relative;width:100%;height:260px;border-radius:20px;overflow:hidden;background:linear-gradient(180deg,#3a5a2a 0%,#5a8a3a 20%,#8ab85a 40%,#c4a85a 55%,#d4b86a 70%,#a08040 100%);box-shadow:0 20px 60px rgba(0,0,0,.4)}
-.crop-field::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(0,0,0,.04) 40px,rgba(0,0,0,.04) 41px);pointer-events:none}
-.crop-field::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 16px,rgba(0,0,0,.06) 16px,rgba(0,0,0,.06) 17px);pointer-events:none}
+.hero{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;margin-top:70px;padding:40px 24px;position:relative;overflow:hidden}
 
-.harvest-trail{position:absolute;top:0;left:0;height:100%;background:linear-gradient(180deg,#2a1a0a 0%,#3a2a1a 20%,#5a3a2a 40%,#6a4a2a 60%,#5a3a1a 80%,#3a2a0a 100%);transition:width .15s linear;overflow:hidden;display:flex;align-items:center;border-radius:20px 0 0 20px}
-.harvest-trail::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(0,0,0,.08) 40px,rgba(0,0,0,.08) 41px);pointer-events:none}
-.harvest-trail::after{content:'EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO ⋆ EM CONSTRUÇÃO';position:absolute;top:50%;left:0;font-size:clamp(.9rem,2.5vw,1.5rem);font-weight:900;letter-spacing:6px;text-transform:uppercase;color:rgba(212,196,160,.15);white-space:nowrap;transform:translateY(-50%);animation:trail-text 3s linear infinite;pointer-events:none;font-family:'Georgia',serif}
+.crop-scene{width:100%;max-width:1100px;margin:0 auto 40px;position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.crop-bg{position:relative;width:100%;height:300px;background:repeating-linear-gradient(
+  92deg,
+  #4a7a2a 0px,#5a8a3a 6px,#6a9a4a 10px,#5a8a3a 14px,#4a7a2a 18px,#3a6a1a 24px
+);background-size:240px 100%;animation:scroll-field 12s linear infinite}
+.crop-bg::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(
+  0deg,transparent,transparent 18px,rgba(0,0,0,.07) 18px,rgba(0,0,0,.07) 19px
+);pointer-events:none}
+.crop-bg::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(
+  90deg,
+  rgba(26,42,26,1) 0%,
+  rgba(26,42,26,0) 10%,
+  rgba(26,42,26,0) 90%,
+  rgba(26,42,26,1) 100%
+);pointer-events:none}
 
-@keyframes trail-text{0%{transform:translateY(-50%) translateX(0)}100%{transform:translateY(-50%) translateX(-50%)}}
+@keyframes scroll-field{0%{background-position:0 0}100%{background-position:-240px 0}}
 
-.combine{position:absolute;top:50%;z-index:10;font-size:clamp(2.4rem,5vw,3.6rem);transform:translate(-50%,-50%);filter:drop-shadow(0 8px 20px rgba(0,0,0,.4));animation:combine-drive 4s ease-in-out infinite;will-change:left}
-@keyframes combine-drive{0%{left:-80px}45%{left:calc(100% + 80px)}55%{left:calc(100% + 80px)}100%{left:-80px}}
+.crop-overlay{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;z-index:2}
+.crop-fade{position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(
+  ellipse 400px 200px at 50% 50%,
+  rgba(26,42,26,0) 0%,
+  rgba(26,42,26,.3) 40%,
+  rgba(26,42,26,.7) 65%,
+  rgba(26,42,26,1) 100%
+);z-index:2;pointer-events:none}
 
-.combine-shadow{position:absolute;bottom:20px;z-index:9;width:50px;height:14px;background:rgba(0,0,0,.2);border-radius:50%;filter:blur(6px);animation:shadow-drive 4s ease-in-out infinite}
-@keyframes shadow-drive{0%{left:-60px;opacity:0}10%{opacity:1}45%{left:calc(100% + 60px);opacity:1}55%{left:calc(100% + 60px);opacity:0}100%{left:-60px;opacity:0}}
+.construction-sign{position:relative;z-index:3;text-align:center;animation:fade-glow 3s ease-in-out infinite}
+.construction-sign .icon-sign{font-size:clamp(2rem,5vw,4rem);display:block;margin-bottom:6px;filter:drop-shadow(0 4px 20px rgba(0,0,0,.5))}
+.construction-sign h2{font-family:'Georgia',serif;font-size:clamp(1.8rem,5vw,3.6rem);font-weight:700;color:#d4c4a0;letter-spacing:8px;text-shadow:0 4px 30px rgba(0,0,0,.6),0 0 60px rgba(212,196,160,.1)}
+.construction-sign h2 span{color:#7daa5a}
+.construction-sign p{font-size:clamp(.7rem,1.2vw,.9rem);color:rgba(212,196,160,.4);letter-spacing:4px;text-transform:uppercase;margin-top:8px;text-shadow:0 2px 20px rgba(0,0,0,.5)}
 
-.effects{position:absolute;top:40%;z-index:11;font-size:clamp(.6rem,1.2vw,.85rem);color:rgba(255,255,255,.3);pointer-events:none;animation:particles 4s ease-in-out infinite;display:flex;gap:2px}
-@keyframes particles{0%{left:-60px;opacity:0}12%{opacity:1;transform:translateY(0)}40%{left:calc(100% + 40px);opacity:1}48%{opacity:0;transform:translateY(-20px)}100%{left:-60px;opacity:0}}
+@keyframes fade-glow{0%,100%{opacity:.85;filter:brightness(1)}50%{opacity:1;filter:brightness(1.15)}}
+
+.crop-line{position:absolute;bottom:0;left:0;width:100%;height:6px;z-index:4;background:linear-gradient(90deg,transparent 0%,#7daa5a 20%,#d4c4a0 50%,#7daa5a 80%,transparent 100%);animation:line-pulse 3s ease-in-out infinite;border-radius:2px;filter:blur(2px)}
+@keyframes line-pulse{0%,100%{opacity:.3;transform:scaleX(.8)}50%{opacity:.8;transform:scaleX(1)}}
 
 .tagline{text-align:center;margin-top:10px}
 .tagline h1{font-family:'Georgia',serif;font-size:clamp(1.6rem,4vw,2.8rem);font-weight:400;color:#d4c4a0;letter-spacing:2px}
@@ -55,13 +73,14 @@ header{position:fixed;top:0;left:0;width:100%;z-index:100;padding:14px 24px;back
 header{padding:12px 16px}
 .logo{font-size:1.1rem}
 .btn-origem{padding:8px 16px;font-size:.78rem}
-.harvest-section{padding:20px 12px;margin-top:60px}
-.crop-field{height:180px;border-radius:14px}
-.scene-wrap{margin-bottom:40px}
+.hero{padding:20px 12px;margin-top:60px}
+.crop-bg{height:200px;border-radius:14px}
+.crop-scene{margin-bottom:24px;border-radius:14px}
+.crop-fade{background:radial-gradient(ellipse 250px 140px at 50% 50%,rgba(26,42,26,0) 0%,rgba(26,42,26,.3) 40%,rgba(26,42,26,.7) 65%,rgba(26,42,26,1) 100%)}
+.construction-sign h2{letter-spacing:4px}
 .contact-section{padding:30px 16px 50px}
 .icon{width:56px;height:56px}
 .icon img{width:24px;height:24px}
-.combine-shadow{width:34px;height:10px}
 }
 </style>
 </head>
@@ -75,19 +94,22 @@ Conheça o Método ORIGEM
 </a>
 </header>
 
-<section class="harvest-section">
-<div class="scene-wrap">
-<div class="scene-label">.— Safra em desenvolvimento —.</div>
-<div class="crop-field">
-<div class="harvest-trail" id="trail"></div>
-<div class="combine" id="combine">🚜</div>
-<div class="combine-shadow" id="shadow"></div>
-<div class="effects" id="particles">✦ ✦ ✦</div>
+<section class="hero">
+<div class="crop-scene">
+<div class="crop-bg"></div>
+<div class="crop-fade"></div>
+<div class="crop-overlay">
+<div class="construction-sign">
+<span class="icon-sign">🚜</span>
+<h2>EM <span>CONSTRUÇÃO</span></h2>
+<p>Site em desenvolvimento</p>
+</div>
+</div>
+<div class="crop-line"></div>
 </div>
 <div class="tagline">
 <h1><span>C.</span>Grade</h1>
 <p>Em breve, uma nova forma de enxergar o agro</p>
-</div>
 </div>
 </section>
 
@@ -101,33 +123,5 @@ Conheça o Método ORIGEM
 <p class="contact-note">contato@cgrade.com.br</p>
 </section>
 
-<script>
-const trail=document.getElementById('trail');
-const combine=document.getElementById('combine');
-const shadow=document.getElementById('shadow');
-const particles=document.getElementById('particles');
-const field=document.querySelector('.crop-field');
-let startTime=null;
-const cycleDuration=4000;
-
-function updateTrail(){
-const now=performance.now();
-if(!startTime)startTime=now;
-const elapsed=(now-startTime)%cycleDuration;
-const progress=elapsed/cycleDuration;
-let pct;
-if(progress<.45){
-pct=progress/.45;
-}else if(progress<.55){
-pct=1;
-}else{
-pct=1-(progress-.55)/.45;
-}
-const w=Math.max(0,Math.min(100,pct*100));
-trail.style.width=w+'%';
-requestAnimationFrame(updateTrail);
-}
-updateTrail();
-</script>
 </body>
 </html>
