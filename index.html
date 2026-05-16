@@ -10,7 +10,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#1a2a1a;color:#fff;o
 a{text-decoration:none;color:inherit}
 header{position:fixed;top:0;left:0;width:100%;z-index:100;padding:14px 24px;background:rgba(26,42,26,.92);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06)}
 .logo{display:flex;align-items:center}
-.logo img{height:52px;width:auto;display:block;mix-blend-mode:screen;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
+.logo img{height:70px;width:auto;display:block;mix-blend-mode:screen;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
 .btn-origem{display:inline-flex;align-items:center;gap:10px;padding:14px 30px;background:linear-gradient(135deg,#8ab85a,#5a8a3a);color:#fff;border-radius:50px;font-weight:700;font-size:1rem;transition:all .3s;border:none;cursor:pointer;animation:pulse-btn 2s ease-in-out infinite;box-shadow:0 6px 24px rgba(125,170,90,.3);position:relative;overflow:hidden}
 .btn-origem::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,.12) 50%,transparent 70%);animation:shine-btn 3s ease-in-out infinite}
 .btn-origem:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 14px 36px rgba(125,170,90,.5)}
@@ -65,8 +65,8 @@ header{position:fixed;top:0;left:0;width:100%;z-index:100;padding:14px 24px;back
 .tagline-logo{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:10px}
 .tagline-logo img{height:clamp(60px,10vw,120px);width:auto;display:block;mix-blend-mode:screen;filter:drop-shadow(0 4px 16px rgba(0,0,0,.3))}
 .tagline-logo .logo-divider{width:2px;height:clamp(40px,6vw,70px);background:linear-gradient(180deg,transparent,#d4c4a0,transparent)}
-.tagline-logo .brand-text{font-family:'Georgia',serif;font-size:clamp(1.2rem,4vw,2.8rem);color:#d4c4a0;font-weight:400;letter-spacing:2px}
-.tagline-logo .brand-text span{color:#7daa5a;font-weight:700}
+.tagline-logo .brand-logo{display:flex;align-items:center}
+.tagline-logo .brand-logo img{height:clamp(50px,8vw,100px);width:auto;display:block;filter:drop-shadow(0 4px 16px rgba(0,0,0,.3))}
 .tagline p{color:rgba(212,196,160,.5);font-size:clamp(.8rem,1.2vw,1rem);margin-top:8px;letter-spacing:1px}
 
 .contact-section{padding:40px 24px 60px;text-align:center;border-top:1px solid rgba(255,255,255,.05)}
@@ -103,7 +103,7 @@ header{padding:10px 12px}
 }
 @media(max-width:380px){
 header{padding:8px 10px}
-.logo img{height:34px}
+.logo img{height:44px}
 .btn-origem{padding:6px 10px;font-size:.65rem}
 .crop-bg{height:150px}
 .crop-fade{background:radial-gradient(ellipse 170px 90px at 50% 50%,rgba(26,42,26,0) 0%,rgba(26,42,26,.3) 40%,rgba(26,42,26,.7) 65%,rgba(26,42,26,1) 100%)}
@@ -139,7 +139,7 @@ Conheça o Método ORIGEM
 <div class="tagline-logo">
 <img src="./Logocgrade.jpeg" alt="C.Grade">
 <div class="logo-divider"></div>
-<div class="brand-text"><span>Método</span> Origem</div>
+<div class="brand-logo"><img src="./metodoorigem/logo-metodo-origem.png" alt="Método ORIGEM"></div>
 </div>
 <p>Em breve, uma nova forma de enxergar o agro</p>
 </div>
