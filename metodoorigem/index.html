@@ -601,6 +601,46 @@
     height: 18px;
     flex-shrink: 0;
   }
+  .checkout-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(10, 24, 16, 0.78);
+    backdrop-filter: blur(4px);
+  }
+  .checkout-modal.is-open { display: flex; }
+  .checkout-modal-card {
+    width: min(980px, 100%);
+    height: min(88vh, 760px);
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.4);
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+  .checkout-modal-top {
+    background: var(--verde);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
+  }
+  .checkout-close {
+    background: transparent;
+    border: 0;
+    color: #fff;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .checkout-frame { width: 100%; height: 100%; border: 0; }
   @keyframes whatsapp-vibrate {
     0%, 100% { transform: translate3d(0,0,0) rotate(0deg); }
     10% { transform: translate3d(-1px,0,0) rotate(-1deg); }
@@ -1004,7 +1044,7 @@
         <div class="preco-ou">— ou —</div>
         <div class="preco-parcelado">ou em até <strong>12x</strong> no cartão</div>
         <div class="preco-parcelado-detalhe">sujeito a juros conforme condições da plataforma</div>
-        <a href="https://pay.kiwify.com.br/LnmGba0" class="btn-primary-full">Garantir minha vaga na Turma 1 →</a>
+        <a href="https://pay.kiwify.com.br/LnmGba0" class="btn-primary-full js-open-checkout">Garantir minha vaga na Turma 1 →</a>
         <div class="preco-vagas">Menos de 15 vagas disponíveis</div>
         <p class="preco-seguro">Parcelamento sujeito a condições da plataforma de pagamento. Início previsto 18 de junho de 2026.</p>
       </div>
@@ -1058,7 +1098,7 @@
 <section id="cta-final">
   <h2>O agro precisa de quem<br>entende <em style="color:var(--ouro-lt)">mercado.</em></h2>
   <p>Se você quer entrar, migrar ou crescer na área comercial do agro, a Turma 1 do Método ORIGEM é o seu ponto de partida. Vagas limitadas, início em junho.</p>
-  <a href="https://pay.kiwify.com.br/LnmGba0" class="btn-primary">Garantir minha vaga na Turma 1 →</a>
+  <a href="https://pay.kiwify.com.br/LnmGba0" class="btn-primary js-open-checkout">Garantir minha vaga na Turma 1 →</a>
   <p class="cta-detalhe">Turma com no máximo 15 alunos · Início 18 de junho de 2026 · R$ 997 à vista ou parcelado em até 12x</p>
 </section>
 
@@ -1070,6 +1110,21 @@
     O Método ORIGEM não promete emprego imediato, promoção automática ou resultado financeiro garantido. A proposta é entregar conhecimento prático, visão de mercado e repertório profissional.
   </p>
 </footer>
+
+<div class="checkout-modal" id="checkoutModal" aria-hidden="true">
+  <div class="checkout-modal-card" role="dialog" aria-modal="true" aria-label="Checkout da Turma 1">
+    <div class="checkout-modal-top">
+      <span>Finalizar inscrição na Turma 1</span>
+      <button class="checkout-close" id="checkoutClose" aria-label="Fechar">×</button>
+    </div>
+    <iframe
+      class="checkout-frame"
+      id="checkoutFrame"
+      title="Checkout Kiwify"
+      src="about:blank"
+    ></iframe>
+  </div>
+</div>
 
 <a
   href="https://wa.me/5542988164058?text=Gostaria%20de%20saber%20mais%20sobre%20o%20m%C3%A9todo%20origem%21"
@@ -1083,6 +1138,45 @@
   </svg>
   Fale Conosco
 </a>
+
+<script>
+  (function () {
+    var checkoutUrl = "https://pay.kiwify.com.br/LnmGba0";
+    var modal = document.getElementById("checkoutModal");
+    var frame = document.getElementById("checkoutFrame");
+    var closeBtn = document.getElementById("checkoutClose");
+    var triggers = document.querySelectorAll(".js-open-checkout");
+
+    function openModal() {
+      frame.src = checkoutUrl;
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      frame.src = "about:blank";
+      document.body.style.overflow = "";
+    }
+
+    triggers.forEach(function (el) {
+      el.addEventListener("click", function (e) {
+        e.preventDefault();
+        openModal();
+      });
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", function (e) {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+    });
+  })();
+</script>
 
 </body>
 </html>
