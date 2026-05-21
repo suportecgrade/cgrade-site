@@ -570,6 +570,50 @@
   footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
   footer strong { color: rgba(255,255,255,0.6); }
 
+  /* ── WHATSAPP FLUTUANTE ── */
+  .whatsapp-float {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 220;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: linear-gradient(135deg, #25d366 0%, #1ea952 100%);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.78rem 1rem;
+    border-radius: 999px;
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    box-shadow: 0 12px 32px rgba(30,169,82,0.45);
+    border: 1px solid rgba(255,255,255,0.3);
+    transform-origin: center;
+    animation: whatsapp-vibrate 1.6s ease-in-out infinite, whatsapp-glow 2.2s ease-in-out infinite;
+  }
+  .whatsapp-float:hover {
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+  }
+  .whatsapp-float svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+  @keyframes whatsapp-vibrate {
+    0%, 100% { transform: translate3d(0,0,0) rotate(0deg); }
+    10% { transform: translate3d(-1px,0,0) rotate(-1deg); }
+    20% { transform: translate3d(1px,0,0) rotate(1deg); }
+    30% { transform: translate3d(-1px,0,0) rotate(-1deg); }
+    40% { transform: translate3d(1px,0,0) rotate(1deg); }
+    50% { transform: translate3d(0,0,0) rotate(0deg); }
+  }
+  @keyframes whatsapp-glow {
+    0%, 100% { box-shadow: 0 10px 24px rgba(30,169,82,0.42), 0 0 0 0 rgba(37,211,102,0.45); }
+    50% { box-shadow: 0 14px 34px rgba(30,169,82,0.6), 0 0 0 12px rgba(37,211,102,0); }
+  }
+
   /* ── RESPONSIVO ── */
   @media (max-width: 768px) {
     nav { padding: 0 4vw; }
@@ -589,6 +633,12 @@
     .formato-grid,
     .valid-grid { grid-template-columns: 1fr; }
     .hero-ctas { flex-direction: column; }
+    .whatsapp-float {
+      right: 14px;
+      bottom: 14px;
+      padding: 0.68rem 0.85rem;
+      font-size: 0.78rem;
+    }
   }
 </style>
 </head>
@@ -1020,6 +1070,19 @@
     O Método ORIGEM não promete emprego imediato, promoção automática ou resultado financeiro garantido. A proposta é entregar conhecimento prático, visão de mercado e repertório profissional.
   </p>
 </footer>
+
+<a
+  href="https://wa.me/5542988164058"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="whatsapp-float"
+  aria-label="Fale conosco no WhatsApp"
+>
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M20.52 3.48A11.78 11.78 0 0 0 12.14.02C5.62.02.3 5.34.3 11.86c0 2.09.55 4.14 1.6 5.95L0 24l6.39-1.86a11.82 11.82 0 0 0 5.75 1.47h.01c6.52 0 11.84-5.32 11.84-11.84 0-3.16-1.23-6.13-3.47-8.29ZM12.15 21.6h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.79 1.1 1.1-3.69-.24-.38a9.77 9.77 0 0 1-1.5-5.19c0-5.42 4.4-9.82 9.82-9.82 2.62 0 5.08 1.02 6.92 2.88a9.73 9.73 0 0 1 2.88 6.94c0 5.42-4.41 9.82-9.82 9.82Zm5.39-7.33c-.3-.15-1.75-.86-2.02-.95-.27-.1-.46-.15-.66.15-.19.3-.76.95-.92 1.14-.17.2-.34.22-.63.08-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.77-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.34.44-.51.15-.17.2-.29.3-.48.1-.2.05-.37-.03-.51-.08-.15-.66-1.6-.9-2.2-.24-.58-.48-.5-.66-.5h-.56c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.44s1.05 2.83 1.2 3.03c.15.2 2.05 3.12 4.96 4.37.69.3 1.23.48 1.64.62.69.22 1.31.19 1.81.12.55-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.11-.27-.18-.57-.33Z"/>
+  </svg>
+  Fale Conosco
+</a>
 
 </body>
 </html>
