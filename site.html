@@ -198,8 +198,7 @@ body{background:var(--off-white);color:var(--gray-800);font-family:var(--font-b)
 
 /* ── BLOG */
 #conteudo{padding:80px 0;background:#fff}
-.blog-grid{display:flex;flex-wrap:wrap;gap:24px;margin-top:48px;justify-content:center}
-.blog-card{flex:1 1 300px;max-width:380px;min-width:280px}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
 .blog-card{background:#fff;border:1px solid var(--gray-100);border-radius:var(--rl);overflow:hidden;transition:all .2s;cursor:pointer;box-shadow:var(--sh-sm)}
 .blog-card:hover{transform:translateY(-3px);box-shadow:var(--sh);border-color:var(--g300)}
 .blog-thumb{height:160px;position:relative;display:flex;align-items:flex-end;padding:16px}
@@ -221,21 +220,18 @@ body{background:var(--off-white);color:var(--gray-800);font-family:var(--font-b)
 .cta-btns{display:flex;gap:14px;flex-wrap:wrap}
 
 /* ── FOOTER */
-#footer{background:var(--black);padding:48px 0 0;color:rgba(255,255,255,.5)}
-.foot-top{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:32px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.06)}
-.foot-brand{font-family:var(--font-d);font-size:18px;font-weight:700;color:#fff;letter-spacing:.02em}
-.foot-brand span{color:var(--gold400)}
-.foot-desc{font-size:13px;line-height:1.7;margin-top:12px;color:rgba(255,255,255,.35);max-width:320px}
-.foot-phrase{font-family:var(--font-d);font-size:16px;font-style:italic;color:var(--gold300);margin-top:16px}
-.foot-col{padding:0}
-.foot-col h4{font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:rgba(255,255,255,.6);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.08)}
+#footer{background:var(--black);padding:60px 0 0;color:rgba(255,255,255,.5)}
+.foot-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.06)}
+.foot-desc{font-size:13px;line-height:1.7;margin-top:16px;color:rgba(255,255,255,.35)}
+.foot-phrase{font-family:var(--font-d);font-size:16px;font-style:italic;color:var(--gold300);margin-top:20px}
+.foot-col h4{font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:rgba(255,255,255,.6);margin-bottom:18px}
 .foot-col ul{list-style:none}
-.foot-col ul li{margin-bottom:8px}
-.foot-col ul li a{font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s;cursor:pointer}
+.foot-col ul li{margin-bottom:10px}
+.foot-col ul li a{font-size:13.5px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s;cursor:pointer}
 .foot-col ul li a:hover{color:var(--g300)}
-.foot-social{display:flex;gap:8px;margin-top:16px}
-.s-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;transition:all .15s;text-decoration:none;color:rgba(255,255,255,.4)}
-.s-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);color:var(--g300)}
+.foot-social{display:flex;gap:10px;margin-top:20px}
+.s-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;transition:all .15s;text-decoration:none}
+.s-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2)}
 .foot-bottom{padding:20px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .foot-bottom p{font-size:12px;color:rgba(255,255,255,.2)}
 .foot-contact li{display:flex;align-items:center;gap:8px}
@@ -265,7 +261,7 @@ body{background:var(--off-white);color:var(--gray-800);font-family:var(--font-b)
   .pilares-grid{grid-template-columns:1fr}
   .blog-grid{grid-template-columns:1fr}
   .dolar-grid{grid-template-columns:1fr}
-  .foot-top{grid-template-columns:repeat(2,1fr);gap:28px}
+  .foot-top{grid-template-columns:1fr 1fr;gap:32px}
 }
 @media(max-width:700px){
   .container{padding:0 20px}
@@ -297,7 +293,7 @@ body{background:var(--off-white);color:var(--gray-800);font-family:var(--font-b)
         <button class="nav-i" onclick="gotoSection('pilares')">Consultoria</button>
         <button class="nav-i" onclick="gotoSection('pilares')">Treinamentos</button>
         <button class="nav-i" onclick="gotoSection('pilares')">Palestras</button>
-        <button class="nav-i" onclick="gotoSection('conteudo')">Blog</button>
+        <button class="nav-i" onclick="gotoSection('conteudo')">Conteúdo</button>
         <button class="nav-i" onclick="openM('contato')">Contato</button>
       </nav>
       <div class="h-right">
@@ -451,28 +447,36 @@ body{background:var(--off-white);color:var(--gray-800);font-family:var(--font-b)
   <div class="container">
     <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:48px;flex-wrap:wrap">
       <div><div class="s-label">Análises &amp; Estratégias</div><h2 class="s-title" style="margin-top:10px">Conteúdo Profissional</h2></div>
-      <a class="btn btn-outline" href="https://cgrade.com.br/blog" style="text-decoration:none">Ver todos os artigos →</a>
+      <button class="btn btn-outline">Ver todos os artigos →</button>
     </div>
     <div class="blog-grid">
-      <a class="blog-card fade-up" href="https://cgrade.com.br/blog/artigo-soja-componentes" style="text-decoration:none">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--g900),var(--g700))"><span class="blog-cat">Comercialização</span></div>
+      <div class="blog-card fade-up">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--g900),var(--g700))"><span class="blog-cat">Mercado</span></div>
         <div class="blog-body">
-          <div class="blog-meta">Artigo · Soja na Bolsa</div>
-          <div class="blog-title">Artigo Soja na Bolsa</div>
-          <p class="blog-exc">Entenda como a gestão dos componentes de preço — Chicago, dólar e basis — pode transformar a sua estratégia de comercialização de soja.</p>
+          <div class="blog-meta">12 Jun 2025 · 6 min de leitura</div>
+          <div class="blog-title">Soja: o que o mercado futuro está precificando para a safra 25/26?</div>
+          <p class="blog-exc">Análise dos contratos de novembro e março na CBOT e as implicações para a estratégia de venda do produtor brasileiro.</p>
         </div>
-        <div class="blog-foot"><span class="blog-read">Ler mais →</span></div>
-      </a>
-      <a class="blog-card fade-up" href="https://cgrade.com.br/blog/informacao-demais-decisao-de-menos" style="text-decoration:none;transition-delay:.1s">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#7a5c1e,var(--gold500))"><span class="blog-cat">Inteligência Comercial</span></div>
+        <div class="blog-foot"><span class="blog-read">Ler artigo →</span></div>
+      </div>
+      <div class="blog-card fade-up" style="transition-delay:.1s">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#7a5c1e,var(--gold500))"><span class="blog-cat">Hedge</span></div>
         <div class="blog-body">
-          <div class="blog-meta">Artigo · Opinião</div>
-          <div class="blog-title">Informação demais, decisão de menos</div>
-          <p class="blog-exc">O desafio do produtor não é a falta de dados. É transformar o excesso de informação em uma decisão comercial possível.</p>
+          <div class="blog-meta">8 Jun 2025 · 8 min de leitura</div>
+          <div class="blog-title">Como montar uma trava de venda usando opções no milho CBOT</div>
+          <p class="blog-exc">Estratégia passo a passo para proteger o preço do milho com collar e as diferenças práticas entre puts e forwards.</p>
         </div>
-        <div class="blog-foot"><span class="blog-read">Ler mais →</span></div>
-      </a>
-
+        <div class="blog-foot"><span class="blog-read">Ler artigo →</span></div>
+      </div>
+      <div class="blog-card fade-up" style="transition-delay:.2s">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#1a3a5c,#2980b9)"><span class="blog-cat">Câmbio</span></div>
+        <div class="blog-body">
+          <div class="blog-meta">3 Jun 2025 · 5 min de leitura</div>
+          <div class="blog-title">Dólar futuro e o impacto no preço da soja em reais: um guia prático</div>
+          <p class="blog-exc">Entenda como a curva cambial afeta sua receita e quando usar NDF ou dólar futuro para travar a conversão.</p>
+        </div>
+        <div class="blog-foot"><span class="blog-read">Ler artigo →</span></div>
+      </div>
     </div>
   </div>
 </section>
