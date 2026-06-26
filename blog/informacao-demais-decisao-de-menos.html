@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informação demais, decisão de menos — Origem Agro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF8F3;
+    --ink:#2E2A24;
+    --brown:#7A6A4F;
+    --gold:#C9A96A;
+    --line:rgba(46,42,36,.14);
+    --muted:#6f675b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:repeating-linear-gradient(135deg,
+      rgba(122,106,79,.035) 0px,
+      rgba(122,106,79,.035) 1px,
+      transparent 1px,
+      transparent 9px);
+  }
+  .wrap{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:0 28px}
+
+  header.top{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:30px 0 26px;border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:baseline;gap:10px;font-family:'Fraunces',serif}
+  .brand .mark{
+    font-size:1.32rem;font-weight:600;letter-spacing:.5px;color:var(--ink);
+  }
+  .brand .mark span{color:var(--gold)}
+  .brand .tag{
+    font-family:'Inter',sans-serif;font-size:.66rem;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--brown)
+  }
+  .kicker{
+    font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--brown);font-weight:600;
+  }
+
+  article{padding:60px 0 40px}
+  .eyebrow{
+    font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;margin-bottom:22px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  h1{
+    font-family:'Fraunces',serif;font-weight:500;
+    font-size:clamp(2rem,5vw,3.05rem);
+    line-height:1.08;letter-spacing:-.01em;
+    margin-bottom:24px;
+  }
+  h1 em{font-style:italic;color:var(--brown)}
+
+  .standfirst{
+    font-size:1.15rem;color:var(--muted);
+    border-left:2px solid var(--gold);
+    padding-left:18px;margin-bottom:34px;
+  }
+
+  .byline{
+    display:flex;align-items:center;gap:14px;
+    padding:18px 0;border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);margin-bottom:46px;
+  }
+  .avatar{
+    width:44px;height:44px;border-radius:50%;
+    background:var(--ink);color:var(--bg);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-size:1.05rem;font-weight:600;flex-shrink:0;
+  }
+  .byline .name{font-weight:600;font-size:.95rem}
+  .byline .role{font-size:.8rem;color:var(--muted)}
+
+  .body p{margin-bottom:22px;font-size:1.06rem}
+  .body p.lead{font-size:1.14rem}
+
+  .pull{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:400;
+    font-size:clamp(1.45rem,3.5vw,1.85rem);line-height:1.32;
+    color:var(--ink);text-align:left;
+    margin:42px 0;padding:6px 0 6px 24px;
+    border-left:3px solid var(--gold);
+  }
+
+  .highlight-box{
+    background:rgba(122,106,79,.06);
+    border:1px solid var(--line);border-radius:4px;
+    padding:22px 24px;margin:30px 0;
+  }
+  .highlight-box .h-label{
+    font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--brown);font-weight:600;margin-bottom:8px;display:block;
+  }
+  .highlight-box p{margin:0;font-family:'Fraunces',serif;font-size:1.18rem;line-height:1.4}
+
+  .divider{
+    text-align:center;margin:40px 0;color:var(--gold);
+    font-size:1.1rem;letter-spacing:1em;
+  }
+
+  footer.end{
+    border-top:1px solid var(--line);
+    padding:40px 0 64px;margin-top:30px;
+  }
+  .author-card{display:flex;gap:18px;align-items:flex-start}
+  .author-card .avatar{width:54px;height:54px;font-size:1.25rem}
+  .author-card .name{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:600}
+  .author-card .bio{font-size:.92rem;color:var(--muted);margin-top:6px;max-width:520px}
+  .author-card .site{
+    display:inline-block;margin-top:12px;font-size:.85rem;font-weight:600;
+    color:var(--brown);text-decoration:none;border-bottom:1px solid var(--gold);
+  }
+
+  @media(max-width:560px){
+    .wrap{padding:0 20px}
+    article{padding:42px 0 30px}
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .eyebrow,h1,.standfirst,.byline{animation:rise .7s ease both}
+    h1{animation-delay:.05s}.standfirst{animation-delay:.12s}.byline{animation-delay:.18s}
+    @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <span class="mark">Origem<span>·</span>Agro</span>
+      <span class="tag">Do campo ao mercado</span>
+    </div>
+    <span class="kicker">Artigo de Opinião</span>
+  </header>
+
+  <article>
+    <div class="eyebrow">Inteligência Comercial &nbsp;·&nbsp; Mercado de Grãos</div>
+
+    <h1>Informação demais, <em>decisão de menos</em></h1>
+
+    <p class="standfirst">O desafio do produtor não é a falta de dados. É transformar o excesso de informação em uma decisão comercial possível.</p>
+
+    <div class="byline">
+      <div class="avatar">CG</div>
+      <div>
+        <div class="name">Cristiano Grade</div>
+        <div class="role">Consultor, treinador e palestrante em agronegócio · Método ORIGEM</div>
+      </div>
+    </div>
+
+    <div class="body">
+      <p class="lead">O produtor rural nunca teve tanto acesso à informação como tem hoje. Relatórios de mercado, análises climáticas, estimativas de safra, dados de exportação, dólar, petróleo, política monetária, geopolítica, USDA, Conab, demanda chinesa, fundos especulativos, prêmios de exportação e mercado futuro estão disponíveis praticamente em tempo real.</p>
+
+      <p>À primeira vista, isso parece positivo. E, de fato, é. Informação é matéria-prima para uma boa decisão. O problema começa quando a informação deixa de ser instrumento e passa a ser ruído. No mercado de grãos, o excesso de informação pode gerar uma falsa sensação de preparo, mas, na prática, muitas vezes aumenta a dúvida, a ansiedade e a dificuldade de agir.</p>
+
+      <p>A questão central não é se o produtor precisa de informação. Ele precisa. A questão é se a informação que chega até ele está realmente ajudando na tomada de decisão.</p>
+
+      <div class="divider">· · ·</div>
+
+      <h2 style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;margin-bottom:16px">Explicar o mercado é diferente de ajudar a decidir</h2>
+
+      <p>Existe uma diferença importante entre explicar o mercado e ajudar o produtor a decidir. Quando se fala de clima nos Estados Unidos, oferta global, demanda chinesa, dólar, prêmio, basis ou política econômica, estamos falando de fundamentos. Esses fundamentos ajudam a entender os movimentos de preço e seus componentes. Porém, fundamento sozinho não responde à pergunta mais importante para quem está exposto ao mercado: <strong>o que eu faço agora?</strong></p>
+
+      <p>É nesse ponto que a discussão fica mais prática. Dizer que o mercado pode subir ou cair não resolve o problema do produtor. Dizer que há risco climático também não resolve. Dizer que a China pode comprar mais, que o dólar pode oscilar ou que Chicago está sensível ao clima ajuda a formar contexto, mas não necessariamente gera decisão.</p>
+
+      <p>A decisão comercial exige outro passo: conectar o fundamento à realidade individual do produtor.</p>
+
+      <div class="highlight-box">
+        <span class="h-label">As perguntas que importam</span>
+        <p>Quanto ele já vendeu? Qual é seu custo de produção? Qual margem está buscando? Como está o caixa? Qual o volume disponível? Qual a necessidade de pagamento? Qual a capacidade de armazenagem? Qual o risco que ele suporta?</p>
+      </div>
+
+      <p>Sem essas respostas, a recomendação tende a ficar genérica.</p>
+
+      <h2 style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;margin-bottom:16px">Nenhuma ferramenta é boa ou ruim sozinha</h2>
+
+      <p>Um exemplo claro está no uso de opções. Dizer "compre uma put" pode até parecer uma recomendação técnica. Mas a pergunta correta vem antes:</p>
+
+      <div class="highlight-box">
+        <span class="h-label">Antes da ferramenta, o contexto</span>
+        <p>Por que comprar uma put? Para proteger qual preço? Sobre qual volume? Em qual vencimento? Com qual custo? Contra qual risco? Essa put protege margem ou apenas dá uma sensação de segurança?</p>
+      </div>
+
+      <p>O mesmo vale para uma venda futura, uma trava de dólar, uma fixação de basis ou uma estratégia com barter. Nenhuma ferramenta é boa ou ruim sozinha. Ela é adequada ou inadequada conforme o contexto, o objetivo e o momento da decisão.</p>
+
+      <div class="pull">Informação explica o mercado. Método ajuda a decidir. O valor não está em saber mais. Está em decidir melhor.</div>
+
+      <h2 style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;margin-bottom:16px">Racionalidade limitada: por que mais dados nem sempre ajudam</h2>
+
+      <p>Essa lógica encontra respaldo na teoria da racionalidade limitada. O ser humano não decide com capacidade infinita de análise. Ele decide com limitações de tempo, atenção, conhecimento, pressão emocional e capacidade de processamento. No agro, isso é ainda mais evidente, porque a decisão comercial acontece em ambiente de incerteza: clima, produção, preço, câmbio, logística e crédito mudam o tempo todo.</p>
+
+      <p>Por isso, entregar mais informação nem sempre significa melhorar a decisão. Em muitos casos, o excesso de dados aumenta a carga cognitiva de quem precisa decidir. O produtor passa a receber tantos sinais diferentes que começa a buscar uma certeza que o mercado nunca vai entregar. E, diante da incerteza, muitas vezes ele trava: não vende, não protege, não executa e fica esperando uma confirmação que talvez nunca venha.</p>
+
+      <p>Esse é um ponto sensível: <strong>informação demais pode paralisar.</strong></p>
+
+      <h2 style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;margin-bottom:16px">Da informação ao método</h2>
+
+      <p>No mercado de commodities, a boa decisão raramente nasce da certeza. Ela nasce de método. Nasce da construção de cenários, da definição de objetivos, do controle de risco e da disciplina de execução. O produtor não precisa saber tudo. Ele precisa saber o suficiente para agir com coerência.</p>
+
+      <p>Por isso, a inteligência comercial no agro precisa evoluir de um modelo apenas informativo para um modelo decisório. Não basta entregar notícia, relatório, gráfico e opinião. É preciso traduzir tudo isso em alternativas práticas. A pergunta não deve ser apenas: "o que está acontecendo no mercado?". Ela precisa avançar para: <strong>"diante disso, o que faz sentido fazer?"</strong>.</p>
+
+      <p>Essa mudança parece simples, mas altera completamente a entrega de valor. Em vez de despejar informações, o trabalho passa a organizar o raciocínio. Em vez de apenas apontar riscos, passa a indicar caminhos possíveis. Em vez de reforçar a ansiedade, ajuda a construir uma decisão possível.</p>
+
+      <p>No fim, o produtor não precisa de uma avalanche de informação. Ele precisa de filtro, método e direção. Precisa entender quais componentes estão criando oportunidade ou risco. Precisa saber se o preço atual remunera sua operação. Precisa avaliar se vale vender, esperar, proteger, travar parte, comprar uma opção, fixar câmbio, abrir basis ou simplesmente não fazer nada.</p>
+
+      <div class="divider">· · ·</div>
+
+      <p>Informação explica o mercado.</p>
+      <p><strong>Método ajuda a decidir.</strong></p>
+      <p>E talvez esse seja o grande desafio da comunicação de mercado no agro: sair da lógica do volume de informação e entrar na lógica da utilidade da informação. Porque, no dia a dia, o valor não está em saber mais. Está em decidir melhor.</p>
+    </div>
+  </article>
+
+  <footer class="end">
+    <div class="author-card">
+      <div class="avatar">CG</div>
+      <div>
+        <div class="name">Cristiano Grade</div>
+        <div class="bio">Consultor, treinador e palestrante em agronegócio, com mais de 25 anos de experiência em comercialização de grãos, barter, originação e gestão de risco. Fundador da Origem Agro e criador do Método ORIGEM.</div>
+        <a class="site" href="https://cgrade.com.br" target="_blank" rel="noopener">cgrade.com.br</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
