@@ -238,9 +238,7 @@ body{background:var(--off-white);color:var(--gray-800);font-family:var(--font-b)
 .s-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);color:var(--g300)}
 .foot-bottom{padding:20px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .foot-bottom p{font-size:12px;color:rgba(255,255,255,.2)}
-.foot-contact li{display:flex;align-items:center;gap:8px}
-.foot-contact li .ico{width:28px;height:28px;border-radius:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
-.foot-contact li a{flex:1}
+
 
 /* ── MODAL */
 .m-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
@@ -519,10 +517,10 @@ body{background:var(--off-white);color:var(--gray-800);font-family:var(--font-b)
         <li><a onclick="gotoSection('pilares')">Palestras</a></li>
         <li><a onclick="openM('contato')">Contato</a></li>
       </ul></div>
-      <div class="foot-col"><h4>Contato</h4><ul class="foot-contact">
-        <li><span class="ico">✉</span><a href="mailto:contato@cgrade.com.br">contato@cgrade.com.br</a></li>
-        <li><span class="ico">📱</span><a onclick="openM('contato')">WhatsApp</a></li>
-        <li><span class="ico">📅</span><a onclick="openM('contato')">Agendar Reunião</a></li>
+      <div class="foot-col"><h4>Contato</h4><ul>
+        <li><a href="mailto:contato@cgrade.com.br">✉ contato@cgrade.com.br</a></li>
+        <li><a onclick="openM('contato')">📱 WhatsApp</a></li>
+        <li><a onclick="openM('contato')">📅 Agendar Reunião</a></li>
       </ul></div>
     </div>
     <div class="foot-bottom">
