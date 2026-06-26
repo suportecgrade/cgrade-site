@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soja: pare de vender preço cheio, comece a gerir componentes — Origem Agro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF8F3;
+    --ink:#2E2A24;
+    --brown:#7A6A4F;
+    --gold:#C9A96A;
+    --line:rgba(46,42,36,.14);
+    --muted:#6f675b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* textura diagonal sutil */
+  body::before{
+    content:"";
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:repeating-linear-gradient(135deg,
+      rgba(122,106,79,.035) 0px,
+      rgba(122,106,79,.035) 1px,
+      transparent 1px,
+      transparent 9px);
+  }
+  .wrap{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:0 28px}
+
+  header.top{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:30px 0 26px;border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:baseline;gap:10px;font-family:'Fraunces',serif}
+  .brand .mark{
+    font-size:1.32rem;font-weight:600;letter-spacing:.5px;color:var(--ink);
+  }
+  .brand .mark span{color:var(--gold)}
+  .brand .tag{
+    font-family:'Inter',sans-serif;font-size:.66rem;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--brown)
+  }
+  .kicker{
+    font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--brown);font-weight:600;
+  }
+
+  article{padding:60px 0 40px}
+  .eyebrow{
+    font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;margin-bottom:22px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  h1{
+    font-family:'Fraunces',serif;font-weight:500;
+    font-size:clamp(2rem,5vw,3.05rem);
+    line-height:1.08;letter-spacing:-.01em;
+    margin-bottom:24px;
+  }
+  h1 em{font-style:italic;color:var(--brown)}
+
+  .standfirst{
+    font-size:1.15rem;color:var(--muted);
+    border-left:2px solid var(--gold);
+    padding-left:18px;margin-bottom:34px;
+  }
+
+  .byline{
+    display:flex;align-items:center;gap:14px;
+    padding:18px 0;border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);margin-bottom:46px;
+  }
+  .avatar{
+    width:44px;height:44px;border-radius:50%;
+    background:var(--ink);color:var(--bg);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-size:1.05rem;font-weight:600;flex-shrink:0;
+  }
+  .byline .name{font-weight:600;font-size:.95rem}
+  .byline .role{font-size:.8rem;color:var(--muted)}
+
+  .body p{margin-bottom:22px;font-size:1.06rem}
+  .body p.lead{font-size:1.14rem}
+
+  .pull{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:400;
+    font-size:clamp(1.45rem,3.5vw,1.85rem);line-height:1.32;
+    color:var(--ink);text-align:left;
+    margin:42px 0;padding:6px 0 6px 24px;
+    border-left:3px solid var(--gold);
+  }
+
+  .question{
+    background:rgba(122,106,79,.06);
+    border:1px solid var(--line);border-radius:4px;
+    padding:22px 24px;margin:30px 0;
+  }
+  .question .q-label{
+    font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--brown);font-weight:600;margin-bottom:8px;display:block;
+  }
+  .question p{margin:0;font-family:'Fraunces',serif;font-size:1.18rem;line-height:1.4}
+
+  .numbers{
+    display:flex;gap:0;flex-wrap:wrap;
+    border:1px solid var(--line);border-radius:4px;
+    margin:34px 0;overflow:hidden;
+  }
+  .numbers .cell{
+    flex:1;min-width:160px;padding:22px 24px;
+    border-right:1px solid var(--line);
+  }
+  .numbers .cell:last-child{border-right:none}
+  .numbers .big{
+    font-family:'Fraunces',serif;font-size:1.7rem;font-weight:600;color:var(--ink);
+  }
+  .numbers .lbl{font-size:.82rem;color:var(--muted);margin-top:4px}
+
+  .divider{
+    text-align:center;margin:40px 0;color:var(--gold);
+    font-size:1.1rem;letter-spacing:1em;
+  }
+
+  footer.end{
+    border-top:1px solid var(--line);
+    padding:40px 0 64px;margin-top:30px;
+  }
+  .author-card{display:flex;gap:18px;align-items:flex-start}
+  .author-card .avatar{width:54px;height:54px;font-size:1.25rem}
+  .author-card .name{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:600}
+  .author-card .bio{font-size:.92rem;color:var(--muted);margin-top:6px;max-width:520px}
+  .author-card .site{
+    display:inline-block;margin-top:12px;font-size:.85rem;font-weight:600;
+    color:var(--brown);text-decoration:none;border-bottom:1px solid var(--gold);
+  }
+
+  @media(max-width:560px){
+    .wrap{padding:0 20px}
+    article{padding:42px 0 30px}
+    .numbers .cell{min-width:100%;border-right:none;border-bottom:1px solid var(--line)}
+    .numbers .cell:last-child{border-bottom:none}
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .eyebrow,h1,.standfirst,.byline{animation:rise .7s ease both}
+    h1{animation-delay:.05s}.standfirst{animation-delay:.12s}.byline{animation-delay:.18s}
+    @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <span class="mark">Origem<span>·</span>Agro</span>
+      <span class="tag">Do campo ao mercado</span>
+    </div>
+    <span class="kicker">Análise</span>
+  </header>
+
+  <article>
+    <div class="eyebrow">Comercialização &nbsp;·&nbsp; Soja</div>
+
+    <h1>Soja: pare de vender preço cheio, <em>comece a gerir componentes</em></h1>
+
+    <p class="standfirst">O mercado ficou mais técnico, mais volátil e mais dependente da leitura separada de Chicago, dólar e basis. O produtor que olha só a saca cheia perde a oportunidade que nasce na diferença entre eles.</p>
+
+    <div class="byline">
+      <div class="avatar">CG</div>
+      <div>
+        <div class="name">Cristiano Grade</div>
+        <div class="role">Consultor em agronegócio · Origem Agro</div>
+      </div>
+    </div>
+
+    <div class="body">
+      <p class="lead">A comercialização de soja está entrando em uma fase em que o produtor não pode mais tomar decisão olhando apenas para o preço cheio da saca. O mercado ficou mais técnico, mais volátil e mais dependente da leitura separada dos componentes de preço.</p>
+
+      <p>Quando se fala em preço de soja no Brasil, normalmente estamos falando da combinação entre Chicago, dólar e basis. Cada um desses componentes tem uma lógica própria. Chicago olha para o mundo, mas principalmente para a safra americana durante boa parte do ano. O dólar olha para juros, risco fiscal, cenário externo, política monetária e fluxo financeiro. Já o basis olha para dentro: oferta local, demanda regional, prêmio de exportação, frete, armazenagem, qualidade, necessidade de execução e apetite comprador.</p>
+
+      <p>É justamente nessa separação que nasce a oportunidade.</p>
+
+      <p>O El Niño é um bom exemplo disso. Em anos de El Niño, o regime de chuvas no Brasil tende a ficar mais irregular. O Centro-Norte pode sofrer com atraso de chuva, veranicos, calor e implantação fora da janela ideal. O Sul, por outro lado, tende a receber mais chuva, o que pode favorecer algumas fases da lavoura, mas também pode trazer excesso de umidade, problemas de manejo, doenças e dificuldade operacional.</p>
+
+      <p>Foi isso que vimos de forma clara na safra 2023/24. A regularização tardia das chuvas, o calor e a irregularidade climática prejudicaram parte importante da soja no Centro-Oeste, Matopiba, São Paulo e Paraná. Em Mato Grosso, principal estado produtor, houve perda relevante frente ao potencial inicial. Ao mesmo tempo, o Sul teve comportamento diferente, com recuperação produtiva em algumas regiões, mas também episódios de excesso de chuva.</p>
+
+      <p>Esse tipo de cenário muda a dinâmica da safra. Quando o plantio atrasa ou fica mais escalonado, a colheita também tende a ser menos concentrada. Isso pode reduzir parte da pressão imediata sobre fretes, armazenagem e execução. Se menos soja chega ao mesmo tempo no porto, o comprador pode precisar melhorar o prêmio para garantir originação. Se o frete não explode e o prêmio melhora, o basis do produtor pode melhorar.</p>
+
+      <p>Mas isso não é uma regra automática. A logística responde à combinação entre volume total de safra, ritmo de colheita, exportação, disputa por caminhão, milho safrinha, fertilizantes e capacidade dos corredores. Uma safra escalonada pode aliviar pico de frete, mas uma safra muito grande, com exportação forte, pode manter o frete elevado por mais tempo.</p>
+
+      <p>Por isso, a leitura correta não é simplesmente dizer que El Niño melhora ou piora preço. O ponto é entender como ele mexe em cada componente.</p>
+
+      <div class="pull">Chicago pode cair mesmo que o basis melhore. O basis pode melhorar mesmo que Chicago esteja pressionada. O preço cheio é apenas o resultado final de forças diferentes trabalhando ao mesmo tempo.</div>
+
+      <p>Hoje, olhando para a lógica de mercado, Chicago carrega um risco importante. Se a safra americana estiver caminhando bem, se o clima seguir favorável e se o USDA confirmar uma área maior do que o mercado espera, a tendência é de pressão sobre as cotações. Isso não significa que Chicago não possa subir. Mercado climático sempre pode surpreender. Mas, no cenário atual, a sustentação de Chicago depende mais de algum problema novo do que de fundamento claramente altista já colocado.</p>
+
+      <p>O dólar também precisa ser olhado com cuidado. A curva futura já carrega um dólar mais alto para 2027. Pode subir mais? Pode. O Brasil entra em período eleitoral, existe risco fiscal, existe ruído político e existe incerteza externa. Mas também pode não subir. O câmbio não depende apenas do Brasil. Ele também depende da política monetária americana, do fluxo global, do apetite ao risco e da força do dólar no mundo.</p>
+
+      <p>É por isso que travar componentes pode fazer mais sentido do que esperar o preço cheio aparecer pronto.</p>
+
+      <p>Se Chicago está em um nível aceitável para a margem do produtor, pode fazer sentido avaliar trava de Chicago. Se a curva do dólar entrega uma taxa interessante frente ao custo de produção e à necessidade de caixa, pode fazer sentido avaliar trava de dólar. Se o basis está ruim por pressão momentânea de frete ou prêmio, o produtor pode estudar deixar esse componente aberto para capturar melhora futura.</p>
+
+      <p>Essa é a lógica da comercialização por componentes.</p>
+
+      <p>O produtor que olha apenas o preço cheio muitas vezes perde a oportunidade porque espera todos os componentes melhorarem ao mesmo tempo. Só que isso raramente acontece. Quando Chicago sobe, o prêmio pode cair. Quando o prêmio melhora, Chicago pode estar pressionada. Quando o dólar sobe, o basis pode piorar. O mercado não entrega a foto perfeita todos os dias.</p>
+
+      <div class="question">
+        <span class="q-label">A pergunta certa</span>
+        <p>Não é só “vale vender soja hoje?”, mas sim: qual componente do meu preço está bom hoje e qual componente eu ainda quero carregar?</p>
+      </div>
+
+      <p>Essa mudança de mentalidade é o que separa venda por impulso de gestão comercial. Não se trata de especular. Trata-se de proteger margem, reduzir risco e transformar preço em método.</p>
+
+      <div class="numbers">
+        <div class="cell">
+          <div class="big">R$ 30 mil</div>
+          <div class="lbl">o que R$ 3,00/saca representa em 10 mil sacas</div>
+        </div>
+        <div class="cell">
+          <div class="big">R$ 50 mil</div>
+          <div class="lbl">o que R$ 5,00/saca representa no mesmo volume</div>
+        </div>
+      </div>
+
+      <p>Para muitos produtores, isso é a diferença entre uma operação apertada e uma operação saudável.</p>
+
+      <p>O produtor não precisa acertar o topo do mercado. Ele precisa construir preço de forma disciplinada, olhando margem, caixa, risco e exposição. E, para isso, vai precisar de apoio técnico. Não basta saber que Chicago está em US$ 11,75, que o dólar futuro está em R$ 5,55 ou que o prêmio está positivo. É preciso entender o que cada número representa dentro da realidade da fazenda.</p>
+
+      <p>A grande oportunidade para consultores, originadores, cerealistas, revendas e mesas de operação está exatamente aqui: ajudar o produtor a sair da discussão genérica de preço e entrar na gestão dos componentes.</p>
+
+      <div class="divider">· · ·</div>
+
+      <p>O mercado está ficando mais complexo. A decisão comercial também precisa ficar mais profissional.</p>
+    </div>
+  </article>
+
+  <footer class="end">
+    <div class="author-card">
+      <div class="avatar">CG</div>
+      <div>
+        <div class="name">Cristiano Grade</div>
+        <div class="bio">Consultor, treinador e palestrante em agronegócio, com mais de 25 anos de experiência em comercialização de grãos, barter, originação e gestão de risco. Fundador da Origem Agro e criador do Método ORIGEM.</div>
+        <a class="site" href="https://cgrade.com.br" target="_blank" rel="noopener">cgrade.com.br</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
