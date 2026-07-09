@@ -54,7 +54,7 @@ body{background:var(--off-white);color:var(--gray-800);font-family:var(--font-b)
 /* ── HEADER */
 #header{background:#fff;border-bottom:1px solid var(--gray-100);position:sticky;top:0;z-index:200;box-shadow:var(--sh-sm)}
 .games-dropdown{position:relative;display:inline-block}
-.games-menu{display:none;position:absolute;top:100%;right:0;background:#fff;border:1px solid var(--gray-100);border-radius:8px;box-shadow:var(--sh-lg);min-width:200px;z-index:300;margin-top:4px}
+.games-menu{display:none;position:absolute;top:100%;right:0;background:#fff;border:1px solid var(--gray-100);border-radius:8px;box-shadow:var(--sh-lg);min-width:240px;z-index:300;margin-top:4px}
 .games-menu.show{display:block}
 .games-menu a{display:block;padding:12px 18px;font-size:13.5px;font-weight:500;color:var(--gray-600);text-decoration:none;transition:all .15s;border-bottom:1px solid var(--gray-100)}
 .games-menu a:last-child{border-bottom:none}
@@ -272,7 +272,7 @@ body{background:var(--off-white);color:var(--gray-800);font-family:var(--font-b)
 }
 @media(max-width:700px){
   .container{padding:0 20px}
-  #main-nav,.btn-area{display:none}
+  #main-nav,.btn-area,.games-dropdown{display:none}
   .hamburger{display:flex}
   .hero-h{font-size:36px}
   .comm-nav{gap:6px}
@@ -301,18 +301,17 @@ body{background:var(--off-white);color:var(--gray-800);font-family:var(--font-b)
         <button class="nav-i" onclick="gotoSection('pilares')">Treinamentos</button>
         <button class="nav-i" onclick="gotoSection('pilares')">Palestras</button>
         <button class="nav-i" onclick="gotoSection('conteudo')">Blog</button>
+        <button class="nav-i" onclick="openM('contato')">Contato</button>
+      </nav>
+      <div class="h-right">
+        <button class="btn-login">Entrar</button>
         <div class="games-dropdown">
-          <button class="nav-i" onclick="toggleGamesMenu()" id="btn-jogos">Jogos ▾</button>
+          <button class="btn-area" onclick="toggleGamesMenu()">Área do Aluno ▾</button>
           <div class="games-menu" id="games-menu">
             <a href="game1.html">Jogo do Hedge — Cenário 1<span>Pré-plantio, clima, correção e colheita</span></a>
             <a href="game2.html">Jogo do Hedge — Cenário 2<span>Choque geopolítico, basis e dólar</span></a>
           </div>
         </div>
-        <button class="nav-i" onclick="openM('contato')">Contato</button>
-      </nav>
-      <div class="h-right">
-        <button class="btn-login">Entrar</button>
-        <button class="btn-area">Área do Aluno</button>
         <div class="hamburger" onclick="openM('contato')"><span></span><span></span><span></span></div>
       </div>
     </div>
