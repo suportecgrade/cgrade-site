@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agro em Duas Velocidades | Origem Agro</title>
+<style>
+  :root{
+    --bg:#FAF8F3;
+    --ink:#2E2A24;
+    --brown:#7A6A4F;
+    --gold:#C9A96A;
+    --petrol:#1B5E5A;
+    --petrol-dark:#134542;
+    --line:rgba(46,42,36,0.14);
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    background-color:var(--bg);
+    background-image:
+      repeating-linear-gradient(135deg, rgba(46,42,36,0.025) 0px, rgba(46,42,36,0.025) 1px, transparent 1px, transparent 14px),
+      repeating-linear-gradient(135deg, rgba(201,169,106,0.03) 0px, rgba(201,169,106,0.03) 1px, transparent 1px, transparent 46px);
+    color:var(--ink);
+    font-family: Calibri, Candara, "Segoe UI", Optima, Arial, sans-serif;
+    line-height:1.7;
+  }
+
+  .wrap{max-width:760px; margin:0 auto; padding:0 24px 80px;}
+
+  /* Masthead */
+  header.masthead{
+    padding:36px 0 22px;
+    border-bottom:2px solid var(--petrol);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .brand{
+    font-family: Cambria, Georgia, "Times New Roman", serif;
+    font-weight:700;
+    font-size:22px;
+    letter-spacing:0.5px;
+    color:var(--petrol-dark);
+  }
+  .brand span{color:var(--gold);}
+  .tagline{
+    font-size:12.5px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:var(--brown);
+  }
+
+  /* Article head */
+  .kicker{
+    margin-top:44px;
+    font-size:12.5px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--petrol);
+    font-weight:700;
+  }
+  h1{
+    font-family: Cambria, Georgia, "Times New Roman", serif;
+    font-size:40px;
+    line-height:1.18;
+    margin:12px 0 14px;
+    color:var(--ink);
+  }
+  .dek{
+    font-size:18px;
+    color:var(--brown);
+    font-style:italic;
+    margin:0 0 18px;
+    max-width:58ch;
+  }
+  .meta{
+    display:flex;
+    gap:16px;
+    align-items:center;
+    font-size:13.5px;
+    color:var(--brown);
+    padding-bottom:28px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:36px;
+  }
+  .meta strong{color:var(--ink);}
+  .dot{width:4px;height:4px;border-radius:50%;background:var(--gold);}
+
+  /* Signature: speed gauges */
+  .gauges{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin:0 0 40px;
+  }
+  .gauge-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:20px 18px 16px;
+    text-align:center;
+  }
+  .gauge-card .zone{
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--brown);
+    margin-bottom:2px;
+  }
+  .gauge-card .gear{
+    font-size:12.5px;
+    color:var(--petrol);
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  svg.gauge{width:100%; max-width:180px; height:auto;}
+  .needle{
+    transform-origin:100px 100px;
+    transition:transform 1.4s cubic-bezier(.2,.9,.2,1);
+  }
+  .speed-value{
+    font-family: Cambria, Georgia, serif;
+    font-weight:700;
+    font-size:26px;
+    color:var(--ink);
+    margin-top:6px;
+  }
+  .speed-unit{font-size:13px; color:var(--brown); font-weight:400;}
+
+  /* Body */
+  article p{
+    font-size:17px;
+    margin:0 0 22px;
+    color:var(--ink);
+  }
+
+  blockquote.pullquote{
+    margin:36px 0;
+    padding:22px 26px;
+    border-left:4px solid var(--gold);
+    background:rgba(201,169,106,0.08);
+    font-family: Cambria, Georgia, serif;
+    font-style:italic;
+    font-size:21px;
+    line-height:1.5;
+    color:var(--petrol-dark);
+  }
+
+  .divider{
+    width:56px;
+    height:3px;
+    background:var(--gold);
+    margin:44px 0 38px;
+  }
+
+  /* Footer / bio */
+  footer.bio{
+    margin-top:56px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+    font-size:14px;
+    color:var(--brown);
+  }
+  footer.bio .name{
+    font-family: Cambria, Georgia, serif;
+    font-weight:700;
+    color:var(--ink);
+    font-size:16px;
+    display:block;
+    margin-bottom:4px;
+  }
+  footer.bio a{color:var(--petrol); text-decoration:none;}
+  footer.bio a:hover{text-decoration:underline;}
+  footer.bio .links{margin-top:6px;}
+  footer.bio .links span{margin-right:14px;}
+
+  @media (max-width:560px){
+    h1{font-size:30px;}
+    .dek{font-size:16.5px;}
+    .gauges{grid-template-columns:1fr;}
+    article p{font-size:16px;}
+    blockquote.pullquote{font-size:18.5px; padding:18px 20px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .needle{transition:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="brand">Origem<span>Agro</span></div>
+    <div class="tagline">Do Campo ao Mercado</div>
+  </header>
+
+  <div class="kicker">Opinião · Gestão de Risco</div>
+  <h1>Agro em Duas Velocidades</h1>
+  <p class="dek">Fora da porteira o mercado corre em quinta marcha. Dentro dela, a gestão ainda anda em segunda &mdash; e é essa diferença que a crise atual está cobrando.</p>
+
+  <div class="meta">
+    <span><strong>Cristiano Grade</strong></span>
+    <span class="dot"></span>
+    <span>Origem Agro</span>
+    <span class="dot"></span>
+    <span>6 min de leitura</span>
+  </div>
+
+  <div class="gauges" id="gauges">
+    <div class="gauge-card">
+      <div class="zone">Fora da Porteira</div>
+      <div class="gear">5ª marcha</div>
+      <svg class="gauge" viewBox="0 0 200 120">
+        <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#e8e2d4" stroke-width="14" stroke-linecap="round"/>
+        <path d="M 20 100 A 80 80 0 0 1 155 40" fill="none" stroke="#1B5E5A" stroke-width="14" stroke-linecap="round"/>
+        <line class="needle" data-angle="160" x1="100" y1="100" x2="100" y2="30" stroke="#2E2A24" stroke-width="3" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="6" fill="#2E2A24"/>
+      </svg>
+      <div class="speed-value">200 <span class="speed-unit">km/h</span></div>
+    </div>
+    <div class="gauge-card">
+      <div class="zone">Dentro da Porteira</div>
+      <div class="gear">2ª marcha</div>
+      <svg class="gauge" viewBox="0 0 200 120">
+        <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#e8e2d4" stroke-width="14" stroke-linecap="round"/>
+        <path d="M 20 100 A 80 80 0 0 1 55 33" fill="none" stroke="#C9A96A" stroke-width="14" stroke-linecap="round"/>
+        <line class="needle" data-angle="24" x1="100" y1="100" x2="100" y2="30" stroke="#2E2A24" stroke-width="3" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="6" fill="#2E2A24"/>
+      </svg>
+      <div class="speed-value">30 <span class="speed-unit">km/h</span></div>
+    </div>
+  </div>
+
+  <article>
+    <p>Costumo dizer que o agronegócio brasileiro vive em duas velocidades. Antes da porteira, o mundo corporativo está de quinta marcha, a 200 km/h: tradings, indústrias e bancos operando com mesas de risco, políticas de hedge, compliance, tecnologia e decisão em tempo real. Dentro da porteira, quando o assunto é gestão, boa parte das fazendas ainda anda em segunda marcha, a 30 km/h.</p>
+
+    <p>Essa diferença de velocidade não aparece na bonança. Entre 2021 e 2023, com preços e margens em níveis históricos, quase qualquer estratégia de venda parecia acertada. Margem alta esconde ineficiência. O ciclo virou, e o cenário atual combina preços pressionados na CBOT, basis apertado, custos elevados e juros nas alturas. A tempestade cobra exatamente de quem não fez a lição de casa na fase boa.</p>
+
+    <blockquote class="pullquote">No mundo corporativo, antes da porteira, a gente está de quinta marcha a 200 km/h. Já dentro da porteira as coisas acontecem, quando se fala em gestão, em segunda marcha a 30 km/h.</blockquote>
+
+    <p>O ponto central é que o problema não é a volatilidade. Ela sempre existiu e sempre vai existir, é da natureza dos mercados de commodities. O problema é atravessar um mercado que muda em minutos com processos que mudam em gerações. Do lado de lá da porteira, uma trading trava câmbio, frete e Chicago na mesma tela, no mesmo minuto. Do lado de cá, muitas propriedades ainda vendem no impulso, sem custo de produção fechado, sem política de comercialização escrita e sem separar o caixa do negócio do caixa da família.</p>
+
+    <p>A crise atual, por mais dolorosa que seja, tem um mérito: obriga a trocar de marcha. Quem acelerou demais na fase de ouro, com expansão alavancada, agora precisa reduzir, desalavancar e renegociar com credores. Quem foi conservador e acumulou reservas vive o momento oposto, o de aproveitar ativos baratos e crescer. Nos dois casos, o caminho passa pelo mesmo ponto: profissionalizar a gestão.</p>
+
+    <p>Na prática, isso significa conhecer o custo de produção por hectare e por saca, definir uma política de comercialização com gatilhos, limites e metas de margem, usar com disciplina as ferramentas disponíveis, como travas de preço, barter e proteção cambial, e construir uma governança que não dependa apenas da intuição do fundador. Intuição abriu as fronteiras agrícolas nas últimas décadas, mas não sustenta a transição para a próxima geração.</p>
+
+    <div class="divider"></div>
+
+    <p>A boa notícia é que trocar de marcha não exige reinventar a fazenda. Exige método, rotina e decisões escritas antes da pressão do mercado, não durante. A montanha-russa vai voltar, ela sempre volta. A diferença estará entre quem chega na próxima curva ainda em segunda marcha e quem aprendeu a dirigir na velocidade que o mercado impõe.</p>
+  </article>
+
+  <footer class="bio">
+    <span class="name">Cristiano Grade</span>
+    Consultor, treinador e palestrante em agronegócio &middot; Comercialização de grãos, barter e gestão de risco
+    <div class="links">
+      <span><a href="https://cgrade.com.br" target="_blank" rel="noopener">cgrade.com.br</a></span>
+      <span><a href="https://instagram.com/origemagrooficial" target="_blank" rel="noopener">@origemagrooficial</a></span>
+      <span><a href="https://linkedin.com/in/cristianograde" target="_blank" rel="noopener">LinkedIn</a></span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Anima os ponteiros dos velocímetros ao carregar a página
+  window.addEventListener('load', function(){
+    document.querySelectorAll('.needle').forEach(function(n){
+      var angle = parseFloat(n.getAttribute('data-angle'));
+      requestAnimationFrame(function(){
+        n.style.transform = 'rotate(' + (angle - 90) + 'deg)';
+        n.setAttribute('transform', 'rotate(' + (angle - 90) + ' 100 100)');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

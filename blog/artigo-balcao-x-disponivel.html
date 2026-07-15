@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mercado de balcão x mercado disponível | Origem Agro</title>
+<style>
+  :root {
+    --bg: #FAF8F3;
+    --ink: #2E2A24;
+    --brown: #7A6A4F;
+    --gold: #C9A96A;
+    --petrol: #1B5E5A;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Calibri, Carlito, "Segoe UI", sans-serif;
+    color: var(--ink);
+    background-color: var(--bg);
+    background-image: repeating-linear-gradient(
+      -38deg,
+      rgba(122, 106, 79, 0.045) 0px,
+      rgba(122, 106, 79, 0.045) 1px,
+      transparent 1px,
+      transparent 9px
+    );
+    line-height: 1.65;
+    font-size: 17px;
+  }
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 32px 40px;
+  }
+  header.brand {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 14px;
+    margin-bottom: 40px;
+  }
+  .brand-name {
+    font-family: Cambria, Caladea, Georgia, serif;
+    font-size: 21px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: var(--ink);
+  }
+  .brand-name span { color: var(--gold); }
+  .brand-tagline {
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brown);
+  }
+  .kicker {
+    font-size: 13px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: bold;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: Cambria, Caladea, Georgia, serif;
+    font-size: 36px;
+    line-height: 1.18;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .subtitle {
+    font-size: 19px;
+    color: var(--brown);
+    margin-bottom: 36px;
+    font-style: italic;
+  }
+  h2 {
+    font-family: Cambria, Caladea, Georgia, serif;
+    font-size: 24px;
+    color: var(--petrol);
+    margin: 38px 0 12px;
+  }
+  p { margin-bottom: 16px; }
+  .lead { font-size: 18.5px; }
+  .pullquote {
+    margin: 36px 0;
+    padding: 6px 0 6px 24px;
+    border-left: 4px solid var(--gold);
+    font-family: Cambria, Caladea, Georgia, serif;
+    font-size: 23px;
+    line-height: 1.4;
+    color: var(--brown);
+    font-style: italic;
+  }
+  .compare {
+    display: flex;
+    gap: 18px;
+    margin: 30px 0 34px;
+  }
+  .card {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(122, 106, 79, 0.25);
+    border-top: 4px solid var(--gold);
+    border-radius: 6px;
+    padding: 20px 22px;
+  }
+  .card.petrol { border-top-color: var(--petrol); }
+  .card h3 {
+    font-family: Cambria, Caladea, Georgia, serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .card ul { list-style: none; }
+  .card li {
+    font-size: 15.5px;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(122, 106, 79, 0.15);
+  }
+  .card li:last-child { border-bottom: none; }
+  .card li strong { color: var(--brown); }
+  footer {
+    margin-top: 52px;
+    border-top: 2px solid var(--gold);
+    padding-top: 18px;
+    font-size: 14px;
+    color: var(--brown);
+    line-height: 1.6;
+  }
+  footer .author {
+    font-family: Cambria, Caladea, Georgia, serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--ink);
+  }
+  @media (max-width: 620px) {
+    .compare { flex-direction: column; }
+    h1 { font-size: 29px; }
+  }
+  @media print {
+    body { font-size: 12.5pt; }
+    .page { max-width: none; padding: 0; }
+    h1 { font-size: 26pt; }
+    h2 { break-after: avoid; }
+    .compare, .pullquote { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="brand">
+    <div class="brand-name">ORIGEM <span>AGRO</span></div>
+    <div class="brand-tagline">Do Campo ao Mercado</div>
+  </header>
+
+  <div class="kicker">Comercialização</div>
+  <h1>Mercado de balcão x mercado disponível</h1>
+  <p class="subtitle">Como funciona, as diferenças e a visão do produtor</p>
+
+  <p class="lead">Todo ano, na colheita, a mesma pergunta se repete nos grupos de produtores: por que o preço da cerealista não acompanha o porto? O prêmio melhora, o câmbio ajuda, a paridade de exportação aponta três ou quatro reais a mais por saca, e o balcão da região não se move. Quando o mercado cai, porém, a tabela ajusta no mesmo dia. A sensação é de injustiça. Mas antes de julgar, é preciso entender em qual mercado o produtor está vendendo. Porque não existe um mercado de soja no Brasil. Existem pelo menos dois, e eles funcionam com regras diferentes.</p>
+
+  <h2>O que é o mercado de balcão</h2>
+  <p>Balcão é o mercado em que o produtor entrega o grão no armazém da cerealista, da cooperativa ou da trading e vende para quem recebeu. O preço é o da tabela do dia, definido pelo comprador. Os descontos de umidade, impureza e avariados são cláusulas comerciais do contrato de compra e venda, livremente pactuadas entre as partes. É aqui que aparece a prática que tanto incomoda: o desconto de impureza aplicado a partir de 0%, quando o padrão oficial tolera até 1% sem desconto.</p>
+  <p>Muitos produtores acreditam que isso fere a legislação. Não fere. A Lei 9.972/2000, a IN 11/2007 e a Portaria SDA 532/2022 regulamentam a classificação do produto, não a formação do preço nem as condições comerciais de compra. As tolerâncias oficiais valem para o regime de depósito e para os contratos padronizados do mercado disponível. No balcão, vale o que está no contrato. E o contrato é do comprador.</p>
+
+  <h2>O que é o mercado disponível</h2>
+  <p>Disponível é o mercado do produto físico livre, negociado entre agentes com contratos padronizados: cerealista vendendo para exportador, indústria comprando na origem, trading fechando CIF porto. Aqui o preço se forma a partir de referências públicas e verificáveis: CBOT, prêmio de exportação, câmbio, frete. Aqui valem as tolerâncias oficiais, incluindo o 1% de impureza sem desconto. E aqui está a oportunidade, porque é neste mercado que as altas chegam primeiro e chegam inteiras.</p>
+  <p>A diferença entre o que o balcão paga e o que o disponível paga é o basis do intermediário. É uma margem legítima de quem presta um serviço e carrega um risco. O problema não é ela existir. O problema é o produtor não saber que ela existe, nem quanto custa.</p>
+
+  <div class="compare">
+    <div class="card">
+      <h3>Balcão</h3>
+      <ul>
+        <li><strong>Propriedade:</strong> o grão deixa de ser do produtor na entrega</li>
+        <li><strong>Preço:</strong> tabela do dia, definida pelo comprador</li>
+        <li><strong>Descontos:</strong> cláusula comercial, impureza desde 0%</li>
+        <li><strong>Repasse:</strong> altas seguradas, baixas imediatas</li>
+        <li><strong>Decisão:</strong> do comprador</li>
+      </ul>
+    </div>
+    <div class="card petrol">
+      <h3>Disponível</h3>
+      <ul>
+        <li><strong>Propriedade:</strong> o vendedor é dono do produto físico</li>
+        <li><strong>Preço:</strong> CBOT, prêmio, câmbio e frete</li>
+        <li><strong>Descontos:</strong> padrões oficiais, 1% de tolerância</li>
+        <li><strong>Repasse:</strong> mercado o dia inteiro, altas integrais</li>
+        <li><strong>Decisão:</strong> do dono do grão</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>As diferenças que o produtor sente no bolso</h2>
+  <p>A primeira diferença é a propriedade. No balcão, o grão que entra no armazém deixa de ser do produtor no ato da entrega. Ele sai da fazenda dono do produto e volta para casa dono de um papel. A partir daí, quem decide preço, momento e destino é o comprador.</p>
+  <p>A segunda é o regime de descontos. O 1% de impureza que a cerealista desconta do produtor desde zero é o mesmo 1% que ela recebe como tolerância quando vende para exportação. Essa diferença não desaparece. Ela apenas muda de dono.</p>
+  <p>A terceira é a formação de preço. A tabela de balcão de uma região costuma ser idêntica entre os compradores, o que alimenta a suspeita de combinação. Na maior parte dos casos, a explicação é mais simples e mais incômoda: todos partem das mesmas referências, aplicam margens semelhantes e seguem quem puxa o preço. Não precisa haver acordo quando não há disputa. E não há disputa por um grão que já está dentro do armazém.</p>
+  <p>A quarta é o repasse assimétrico. O comprador de balcão informa preço uma ou duas vezes ao dia, ignora o mercado noturno, segura as altas e repassa as baixas. Não é maldade. É gestão de risco de quem paga à vista, vende a prazo e precisa proteger a própria margem em um mercado que se move o dia inteiro.</p>
+
+  <h2>Por que o cerealista opera assim</h2>
+  <p>É importante dizer com clareza: o cerealista não é o vilão dessa história. Ele imobiliza capital pagando o produtor à vista, financia o carregamento, assume risco de basis, de logística e de contraparte, e precisa remunerar essa operação. Os mecanismos do balcão são o modelo de negócio dele. Condenar o agente individual erra o alvo. O alvo é o regime em que o grão entra.</p>
+
+  <h2>A inversão da lógica</h2>
+  <p>A saída não está em exigir que o balcão se comporte como depósito. Está em mudar de regime. Quando o grão entra em armazém geral de verdade, com contrato de depósito e emissão de CDA/WA, a lógica inverte: o produtor paga pela prestação de serviço de recepção, secagem, limpeza e armazenagem, recebe as tolerâncias oficiais na classificação, permanece dono do produto físico e não apenas do papel, e decide para quem, quando e onde vender, inclusive com entrega no porto, exatamente como faz o intermediário hoje.</p>
+  <p>Nesse regime, a diferença entre balcão e disponível deixa de ser margem invisível do comprador e passa a ser oportunidade capturável pelo produtor. O custo do serviço de armazenagem é visível e conhecido. O custo do balcão é invisível e, quase sempre, maior.</p>
+
+  <div class="pullquote">Disponível é oportunidade, mas só para quem tem o produto disponível.</div>
+
+  <h2>O que isso exige do produtor</h2>
+  <p>Duas coisas, e nenhuma delas é simples. Primeiro, planejamento de caixa. Quem precisa de dinheiro no ato da entrega não tem escolha de regime, tem urgência. A liberdade comercial começa no fluxo de caixa que permite esperar. Segundo, escolha de parceiros. É preciso buscar armazéns dispostos a operar como prestadores de serviço, em regime de depósito, e aceitar pagar por isso.</p>
+  <p>Enquanto todo grão que cruza a porteira virar balcão, o mercado vai continuar funcionando exatamente como está. E vai continuar sendo racional que funcione assim. Profissionalizar da porteira para fora começa por uma decisão que parece pequena e não é: continuar dono do próprio produto.</p>
+
+  <footer>
+    <div class="author">Cristiano Grade</div>
+    Consultor, treinador e palestrante em comercialização de grãos, barter e gestão de risco. Mais de 25 anos de experiência no agronegócio.<br>
+    cgrade.com.br &nbsp;·&nbsp; @origemagrooficial &nbsp;·&nbsp; linkedin.com/in/cristianograde
+  </footer>
+
+</div>
+</body>
+</html>
