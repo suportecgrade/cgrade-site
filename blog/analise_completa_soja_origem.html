@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Origem Agro — Soja: da bolsa ao balcão. Correlação, sazonalidade e basis</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --terra:#4a3423;--terra2:#6b4a2f;--areia:#f5efe4;--areia2:#ece2cf;--papel:#fbf8f1;
+    --verde:#3f7d4e;--cobre:#c0662e;--trigo:#c9a247;--azul:#2f6a7d;
+    --tinta:#2c2114;--tinta-suave:#6a5a45;--linha:#d8cbb2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Georgia,'Times New Roman',serif;background:var(--areia);color:var(--tinta);line-height:1.68;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:940px;margin:0 auto;padding:0 24px 100px}
+
+  /* Capa */
+  header{background:linear-gradient(155deg,var(--terra) 0%,var(--terra2) 100%);color:var(--areia);padding:80px 24px 64px}
+  .header-inner{max-width:940px;margin:0 auto}
+  .brand{font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:.42em;font-size:.74rem;font-weight:700;color:var(--trigo);margin-bottom:30px}
+  .brand span{opacity:.7;letter-spacing:.28em;margin-left:.2em}
+  h1{font-size:3rem;font-weight:400;line-height:1.1;letter-spacing:-.015em;margin-bottom:22px;max-width:20ch}
+  .lede{font-size:1.16rem;color:var(--areia2);max-width:60ch}
+  .meta{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--trigo);margin-top:34px;opacity:.85}
+
+  /* Índice */
+  nav.toc{background:var(--papel);border-bottom:1px solid var(--linha);position:sticky;top:0;z-index:10;padding:16px 24px}
+  .toc-inner{max-width:940px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.76rem}
+  nav.toc a{color:var(--tinta-suave);text-decoration:none;padding:5px 12px;border:1px solid var(--linha);border-radius:2px;transition:.15s;white-space:nowrap}
+  nav.toc a:hover{background:var(--terra);color:var(--areia);border-color:var(--terra)}
+
+  section{margin-top:64px;scroll-margin-top:70px}
+  .num-sec{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.72rem;font-weight:700;color:var(--cobre);letter-spacing:.2em}
+  .eyebrow{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cobre);font-weight:700;display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--cobre)}
+  h2{font-size:1.95rem;font-weight:400;margin-bottom:14px;letter-spacing:-.01em;max-width:24ch}
+  h3{font-size:1.25rem;font-weight:400;margin:32px 0 8px;color:var(--terra)}
+  p.body{font-size:1.05rem;color:var(--tinta);max-width:68ch;margin-bottom:8px}
+  p.body + p.body{margin-top:16px}
+  .intro-lead{font-size:1.18rem;color:var(--terra);max-width:64ch;margin-bottom:20px;font-style:italic}
+
+  .card{background:#fff;border:1px solid var(--linha);border-radius:2px;padding:26px 26px 30px;margin-top:24px}
+  .card-title{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--tinta);margin-bottom:2px}
+  .card-sub{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.74rem;color:var(--tinta-suave);margin-bottom:18px}
+  .chart-box{position:relative;height:330px}
+  .chart-box.tall{height:400px}
+  .legend-note{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:var(--tinta-suave);margin-top:14px;display:flex;gap:22px;flex-wrap:wrap}
+  .legend-note span{display:flex;align-items:center;gap:7px}
+  .sw{width:22px;height:3px;display:inline-block}
+
+  .pull{border-left:3px solid var(--cobre);padding:8px 0 8px 26px;margin:30px 0;font-size:1.3rem;color:var(--terra);max-width:60ch;line-height:1.5}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--linha);border:1px solid var(--linha);margin-top:28px}
+  .stat{background:var(--areia);padding:22px 20px}
+  .stat .num{font-size:2.1rem;color:var(--terra);line-height:1;margin-bottom:8px}
+  .stat .num.neg{color:var(--cobre)} .stat .num.pos{color:var(--verde)}
+  .stat .lab{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--tinta-suave)}
+
+  .corr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--linha);border:1px solid var(--linha);margin-top:24px}
+  .corr{background:#fff;padding:20px 22px}
+  .corr .pair{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--tinta-suave);margin-bottom:6px}
+  .corr .val{font-size:1.75rem;color:var(--terra)} .corr .val.neg{color:var(--cobre)} .corr .val.pos{color:var(--verde)} .corr .val.weak{color:var(--tinta-suave)}
+  .corr .desc{font-size:.92rem;color:var(--tinta-suave);margin-top:4px;font-family:Georgia,serif}
+
+  .divider{height:1px;background:var(--linha);margin:56px 0 0}
+
+  .closing{background:var(--terra);color:var(--areia);padding:44px 40px;margin-top:56px;border-radius:2px}
+  .closing h2{color:var(--areia)}
+  .closing p{color:var(--areia2);max-width:64ch;font-size:1.06rem;margin-bottom:12px}
+  .closing .num-sec{color:var(--trigo)}
+
+  footer{margin-top:56px;padding-top:26px;border-top:1px solid var(--linha);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.76rem;color:var(--tinta-suave)}
+  footer strong{color:var(--terra)}
+  .disc{margin-top:10px;font-style:italic;font-family:Georgia,serif;font-size:.82rem;max-width:74ch}
+
+  @media(max-width:640px){
+    h1{font-size:2.1rem}h2{font-size:1.55rem}
+    .stats,.corr-grid{grid-template-columns:1fr}
+    .chart-box{height:280px}
+    header{padding:56px 24px 44px}
+    .closing{padding:32px 24px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">Origem Agro <span>· do campo ao mercado</span></div>
+    <h1>Da bolsa ao balcão</h1>
+    <p class="lede">Como a soja de Chicago, o dólar e o basis se combinam para formar o preço que chega ao produtor paranaense, e por que entender essa cadeia é a base de qualquer decisão de comercialização. Análise sobre 136 pregões, de 02/01/2026 a 24/07/2026.</p>
+    <div class="meta">Leitura Origem · Análise completa · Soja safra 2026</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#abertura">Abertura</a>
+    <a href="#correlacao">1 · Soja × Dólar</a>
+    <a href="#basis">2 · O basis</a>
+    <a href="#sazonalidade">3 · Sazonalidade</a>
+    <a href="#balcao">4 · Do porto ao balcão</a>
+    <a href="#decisao">5 · Basis e decisão</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section id="abertura">
+    <p class="num-sec">ABERTURA</p>
+    <h2>Um produto, vários preços</h2>
+    <p class="intro-lead">A soja não tem um preço. Tem uma cadeia de preços, e a diferença entre eles é onde mora a decisão de vender.</p>
+    <p class="body">No mesmo dia, a soja vale coisas diferentes conforme o ponto da cadeia. Em Chicago, ela é uma cotação global em dólar por bushel. Convertida pela taxa de câmbio, vira uma paridade teórica em reais por saca. No porto de Paranaguá, ganha o prêmio de exportação e vira preço FOB. E na porteira, depois de descontado o frete e a margem de quem origina, vira o preço de balcão, aquele que o produtor efetivamente recebe.</p>
+    <p class="body">Esta análise percorre essa cadeia de ponta a ponta. Começa pela relação entre a soja e o dólar, mostra como o basis conecta Chicago à realidade local, revela a sazonalidade que faz o basis apertar e afrouxar ao longo do ano, e termina no balcão, onde todas essas forças se encontram no bolso do produtor. O fio condutor é um só: o basis não é ruído de mercado, é a variável central de decisão de comercialização.</p>
+  </section>
+
+  <section id="correlacao">
+    <p class="num-sec">PARTE 1</p>
+    <div class="eyebrow">A relação de origem</div>
+    <h2>Soja e dólar puxam para lados opostos</h2>
+    <p class="body">Toda a formação de preço da soja em reais nasce de duas cotações que se movem por conta própria. A soja em Chicago responde a oferta e demanda globais, clima e ritmo de exportação. O dólar responde a juros, fluxo de capital e risco. Analisadas juntas ao longo dos 136 pregões do período, elas revelam uma relação inversa consistente: a correlação de Pearson entre as duas ficou em -0.71, uma associação forte e negativa.</p>
+    <div class="card">
+      <div class="card-title">Soja CBOT × Dólar/Real</div>
+      <div class="card-sub">US$/bushel e R$/US$ — fechamentos diários, eixos independentes</div>
+      <div class="chart-box tall"><canvas id="c_comb"></canvas></div>
+    </div>
+    <p class="body">O período confirma o mecanismo em episódios claros. Quando o real se valorizou, a soja em dólar tendeu a subir; quando o dólar avançou, a soja recuou. São 20% de amplitude na soja em dólar contra 10% no câmbio, forças de magnitudes diferentes empurrando em sentidos contrários.</p>
+    <div class="pull">Essa oposição é a primeira camada de amortecimento do preço em reais: quando uma ponta sobe e a outra cai, parte do movimento se cancela antes mesmo de chegar ao Brasil.</div>
+  </section>
+
+  <section id="basis">
+    <p class="num-sec">PARTE 2</p>
+    <div class="eyebrow">A ponte entre dois mundos</div>
+    <h2>O basis traduz Chicago para a realidade local</h2>
+    <p class="body">A paridade de exportação, soja de Chicago convertida em reais, é só uma referência teórica. O que o produtor recebe no físico raramente coincide com ela, e a diferença entre os dois tem nome: basis. Ele é a distância entre o preço físico convertido para dólar por bushel e a cotação da CBOT, e carrega tudo o que Chicago não enxerga: frete até o porto, prêmio ou desconto de exportação, disponibilidade local e a disputa por originação.</p>
+    <p class="body">No período, o basis em Paranaguá variou de -169 a 90 centavos de dólar por bushel, com média perto de -58. É uma faixa larga, e é exatamente essa amplitude que explica por que o preço na porteira não segue Chicago em linha reta. A correlação entre o basis e a CBOT ficou em -0.54, moderada e negativa: quando a bolsa sobe, o basis tende a comprimir e devolver parte do ganho ao comprador; quando cai, o basis abre e segura o preço físico.</p>
+    <div class="card">
+      <div class="card-title">Basis Paranaguá</div>
+      <div class="card-sub">Centavos de dólar por bushel — físico convertido menos CBOT</div>
+      <div class="chart-box"><canvas id="c_basis"></canvas></div>
+    </div>
+    <p class="body">É esse comportamento que torna o basis um amortecedor. Some a relação inversa entre soja e câmbio da Parte 1 à compressão do basis nas altas, e o resultado é um preço físico em reais bem menos volátil do que qualquer uma das cotações de origem.</p>
+  </section>
+
+  <section id="sazonalidade">
+    <p class="num-sec">PARTE 3</p>
+    <div class="eyebrow">O calendário do basis</div>
+    <h2>A sazonalidade: o basis afunda na colheita</h2>
+    <p class="body">O basis não é um número aleatório que muda dia a dia. Ele segue um ciclo amarrado ao calendário da safra, e agrupá-lo por mês torna esse ciclo evidente. Em janeiro, ainda com oferta apertada de safra velha, o basis está próximo do equilíbrio. Conforme a colheita da safra nova avança e a soja chega em volume, entre fevereiro e maio, ele afunda. O fundo de pressão foi em Mar, com média perto de -116 centavos por bushel. A partir de junho, com a safra escoada e a disputa por originação apertando, o basis recupera e volta para perto do equilíbrio em julho.</p>
+    <div class="card">
+      <div class="card-title">Basis médio mensal</div>
+      <div class="card-sub">Centavos de dólar por bushel — média dos pregões de cada mês</div>
+      <div class="chart-box"><canvas id="c_saz"></canvas></div>
+    </div>
+    <div class="pull">O basis aperta quando todo mundo colhe e afrouxa quando a soja fica escassa. É previsível o suficiente para virar calendário de decisão.</div>
+    <p class="body">A consequência é direta. O FOB Paraná parte de cerca de R$ 125 em janeiro, recua ao longo da safra, e só ganha força de verdade no segundo semestre, chegando a R$ 134 de média em julho. Esse repique coincide com a recuperação do basis, não apenas com movimentos de Chicago ou câmbio.</p>
+    <div class="card">
+      <div class="card-title">FOB médio × Basis médio por mês</div>
+      <div class="card-sub">R$/saca (barras) e centavos/bushel (linha), eixos independentes</div>
+      <div class="chart-box tall"><canvas id="c_dual"></canvas></div>
+    </div>
+  </section>
+
+  <section id="balcao">
+    <p class="num-sec">PARTE 4</p>
+    <div class="eyebrow">A última camada</div>
+    <h2>Do porto ao balcão: onde o produtor recebe</h2>
+    <p class="body">Entre o preço FOB no porto e o que o produtor recebe na região existe mais uma camada: o desconto de balcão. Colocando as três referências no mesmo eixo, paridade pura, FOB Paraná e balcão ao produtor, fica visível onde cada parcela de valor entra ou sai da conta.</p>
+    <div class="card">
+      <div class="card-title">Balcão × FOB Paraná × Paridade pura</div>
+      <div class="card-sub">R$ por saca de 60 kg — fechamentos diários</div>
+      <div class="chart-box tall"><canvas id="c_tri"></canvas></div>
+      <div class="legend-note">
+        <span><span class="sw" style="background:var(--verde)"></span> Balcão ao produtor</span>
+        <span><span class="sw" style="background:var(--trigo)"></span> FOB Paraná à vista</span>
+        <span><span class="sw" style="background:var(--azul);height:0;border-top:2px dashed var(--azul)"></span> Paridade pura CBOT</span>
+      </div>
+    </div>
+    <p class="body">A folga entre o FOB no porto e o balcão na região não é constante. No pico da safra, ela é pequena, cerca de R$ 7.2 por saca: com muita soja disponível, os preços se aproximam. Na entressafra ela se abre, chegando a R$ 13.8 por saca em julho. Conforme o FOB dispara no segundo semestre, o balcão sobe mais devagar, e o diferencial se amplia.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">R$ 8</div><div class="lab">Desconto médio FOB − balcão</div></div>
+      <div class="stat"><div class="num">R$ 18</div><div class="lab">Desconto máximo (entressafra)</div></div>
+      <div class="stat"><div class="num pos">+0.61</div><div class="lab">Correlação balcão × FOB</div></div>
+    </div>
+    <p class="body">O balcão acompanha o FOB com correlação de +0.61, forte mas não perfeita, e tem correlação praticamente nula com a CBOT (-0.05). Isso mostra o quanto o movimento de Chicago é filtrado pelas camadas de basis e desconto regional antes de chegar ao produtor. O que a bolsa faz lá fora chega diluído na porteira.</p>
+  </section>
+
+  <section id="decisao">
+    <p class="num-sec">PARTE 5 · SÍNTESE</p>
+    <div class="eyebrow">O mapa completo das correlações</div>
+    <h2>Quem se move com quem</h2>
+    <div class="corr-grid">
+      <div class="corr"><div class="pair">Soja CBOT × Dólar</div><div class="val neg">-0.71</div><div class="desc">Forte e negativa. O eixo de origem de todo o preço em reais.</div></div>
+      <div class="corr"><div class="pair">Basis × Soja CBOT</div><div class="val neg">-0.54</div><div class="desc">Negativa moderada: o basis comprime quando Chicago sobe.</div></div>
+      <div class="corr"><div class="pair">Basis × Dólar</div><div class="val pos">+0.30</div><div class="desc">Positiva fraca: dólar mais alto tende a abrir o basis.</div></div>
+      <div class="corr"><div class="pair">Balcão × FOB</div><div class="val pos">+0.61</div><div class="desc">Forte: o balcão segue o porto, com folga que varia no ano.</div></div>
+      <div class="corr"><div class="pair">Balcão × CBOT</div><div class="val weak">-0.05</div><div class="desc">Quase nula: Chicago chega diluído à porteira.</div></div>
+      <div class="corr"><div class="pair">FOB × Dólar</div><div class="val weak">+0.09</div><div class="desc">Quase nula: o basis absorve o câmbio antes do físico.</div></div>
+    </div>
+
+    <div class="closing">
+      <p class="num-sec">A BASE DA DECISÃO</p>
+      <h2>O basis como fator de decisão e antecipação</h2>
+      <p>Todas as correlações apontam para o mesmo lugar. Chicago e o câmbio se opõem e se amortecem. O basis comprime nas altas e abre nas quedas. E entre o porto e o balcão existe um desconto que cresce justamente quando o preço melhora. O que sobra dessas três camadas é o preço que o produtor recebe, e nenhuma delas é ruído.</p>
+      <p>Fixar preço no fundo da safra, quando o basis está em -116 como em Mar, é entregar prêmio ao comprador no pior momento do ano. Quem lê a sazonalidade e consegue segurar posição para capturar a recuperação do basis na entressafra melhora o preço final sem depender de a bolsa subir.</p>
+      <p>Por isso, travar CBOT, travar câmbio e capturar basis são três decisões distintas, com calendários próprios. O basis é a mais local e a mais negociável das três, e é ela que separa quem comercializa por reação de quem comercializa por estratégia.</p>
+      <p>E aqui está o ponto que transforma a análise em ferramenta: o histórico de basis não descreve só o passado, ele cria um parâmetro para o presente. Quando o produtor conhece a faixa em que o basis costuma andar em cada época do ano, ele passa a reconhecer, no momento em que um preço lhe é ofertado, se aquele valor embute um basis acima ou abaixo do padrão sazonal. É essa leitura que muda a natureza do contrato a termo. Um preço a termo com basis melhor do que o histórico daquela janela não é uma aposta contra o mercado: é uma oportunidade de travar hoje um prêmio que a sazonalidade dificilmente sustentaria. A decisão de vender pode, e muitas vezes deve, ser antecipada.</p>
+      <p>O contrato a termo deixa de ser risco e vira instrumento quando o basis ofertado supera a referência histórica. Sem esse parâmetro, o produtor decide no escuro e tende a reagir ao preço do dia. Com ele, decide com base em quanto aquele basis vale frente ao que a própria série mostra ser normal. Ler o basis é, no fim, ler o momento certo de vender, e reconhecer quando esse momento chegou antes do esperado.</p>
+    </div>
+  </section>
+
+  <footer>
+    <strong>Origem Agro · Leitura Origem</strong> — análise completa de comercialização de soja, safra 2026. 136 pregões de 02/01/2026 a 24/07/2026.<br>
+    <span class="disc">Fontes: CBOT soja (referência pública contínua, complementada por fechamentos do contrato novembro/2026), USD/BRL (série FRED e fechamentos públicos), preço físico e FOB Paraná, e balcão ao produtor (média dos dois pregões diários informados). Basis = físico convertido para US$/bushel menos CBOT, calculado apenas em pregões com todas as referências disponíveis. Conversão por 27,2155 kg/bushel e 60 kg/saca, sem frete adicional. Dias sem cotação excluídos. Material de caráter informativo, não constitui recomendação de compra, venda ou travamento.</span>
+  </footer>
+
+</div>
+
+<script>
+
+const L=["2026-01-02", "2026-01-05", "2026-01-06", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-26", "2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27", "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-23", "2026-03-24", "2026-03-25", "2026-03-26", "2026-03-27", "2026-03-30", "2026-03-31", "2026-04-01", "2026-04-02", "2026-04-06", "2026-04-07", "2026-04-08", "2026-04-09", "2026-04-10", "2026-04-13", "2026-04-14", "2026-04-15", "2026-04-16", "2026-04-17", "2026-04-20", "2026-04-22", "2026-04-23", "2026-04-24", "2026-04-27", "2026-04-28", "2026-04-29", "2026-04-30", "2026-05-04", "2026-05-05", "2026-05-06", "2026-05-07", "2026-05-08", "2026-05-11", "2026-05-12", "2026-05-13", "2026-05-14", "2026-05-15", "2026-05-18", "2026-05-19", "2026-05-20", "2026-05-21", "2026-05-22", "2026-05-26", "2026-05-27", "2026-05-28", "2026-05-29", "2026-06-01", "2026-06-02", "2026-06-03", "2026-06-05", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18", "2026-06-22", "2026-06-23", "2026-06-24", "2026-06-25", "2026-06-26", "2026-06-29", "2026-06-30", "2026-07-01", "2026-07-02", "2026-07-06", "2026-07-07", "2026-07-08", "2026-07-09", "2026-07-10", "2026-07-13", "2026-07-14", "2026-07-15", "2026-07-16", "2026-07-17", "2026-07-20", "2026-07-21", "2026-07-22", "2026-07-23", "2026-07-24"];
+const CBOT=[10.46, 10.618, 10.562, 10.67, 10.612, 10.625, 10.49, 10.388, 10.425, 10.642, 10.688, 10.53, 10.645, 10.64, 10.678, 10.618, 10.672, 10.748, 10.722, 10.642, 10.598, 10.655, 10.9, 11.1, 11.152, 11.098, 11.225, 11.24, 11.372, 11.33, 11.3, 11.41, 11.375, 11.502, 11.552, 11.65, 11.635, 11.708, 11.64, 11.705, 11.695, 11.792, 12.008, 11.962, 12.018, 12.14, 12.272, 12.252, 11.552, 11.57, 11.618, 11.685, 11.612, 11.635, 11.55, 11.718, 11.738, 11.592, 11.598, 11.71, 11.685, 11.635, 11.668, 11.582, 11.62, 11.652, 11.758, 11.622, 11.58, 11.67, 11.638, 11.672, 11.8, 11.815, 11.75, 11.785, 11.91, 11.89, 11.975, 11.962, 12.228, 12.115, 11.95, 11.952, 12.08, 12.128, 12.25, 12.27, 11.942, 11.765, 12.13, 12.095, 11.992, 11.938, 11.965, 11.855, 11.86, 11.985, 11.868, 11.815, 11.675, 11.54, 11.215, 11.162, 11.138, 11.232, 11.15, 11.135, 11.192, 11.3, 11.32, 11.228, 11.422, 11.418, 11.35, 11.578, 11.562, 11.388, 11.43, 11.492, 11.478, 11.922, 11.978, 11.898, 11.825, 11.908, 11.92, 11.905, 12.0, 11.95, 12.03, 12.262, 12.228, 12.39, 12.438, 12.535], DOL=[5.422, 5.409, 5.37, 5.39, 5.385, 5.354, 5.368, 5.384, 5.38, 5.363, 5.372, 5.362, 5.324, 5.296, 5.295, 5.273, 5.213, 5.211, 5.214, 5.246, 5.26, 5.224, 5.247, 5.261, 5.218, 5.191, 5.199, 5.176, 5.197, 5.23, 5.215, 5.224, 5.186, 5.154, 5.147, 5.137, 5.152, 5.137, 5.19, 5.273, 5.212, 5.258, 5.27, 5.21, 5.14, 5.157, 5.214, 5.291, 5.266, 5.197, 5.201, 5.245, 5.29, 5.246, 5.262, 5.22, 5.23, 5.231, 5.237, 5.212, 5.151, 5.16, 5.152, 5.16, 5.094, 5.07, 5.025, 5.022, 4.987, 4.997, 5.001, 4.981, 4.982, 4.967, 4.954, 5.0, 4.969, 4.986, 4.998, 4.979, 4.967, 4.91, 4.926, 4.928, 4.898, 4.898, 4.9, 4.907, 4.979, 5.074, 5.006, 5.044, 5.015, 5.003, 5.024, 5.029, 5.062, 5.047, 5.058, 5.032, 5.013, 5.046, 5.144, 5.169, 5.177, 5.176, 5.146, 5.073, 5.057, 5.078, 5.06, 5.169, 5.131, 5.181, 5.21, 5.173, 5.159, 5.181, 5.166, 5.201, 5.2, 5.147, 5.152, 5.162, 5.12, 5.105, 5.12, 5.077, 5.08, 5.097, 5.117, 5.089, 5.078, 5.064, 5.08, 5.066], CONV=[125.043, 126.612, 125.052, 126.786, 125.988, 125.42, 124.143, 123.303, 123.641, 125.828, 126.572, 124.473, 124.933, 124.241, 124.646, 123.438, 122.656, 123.48, 123.266, 123.083, 122.88, 122.709, 126.078, 128.749, 128.303, 126.992, 128.667, 128.251, 130.292, 130.63, 129.918, 131.419, 130.053, 130.699, 131.091, 131.948, 132.163, 132.587, 133.188, 136.076, 134.394, 136.711, 139.502, 137.4, 136.193, 138.023, 141.071, 142.932, 134.122, 132.565, 133.217, 135.114, 135.42, 134.564, 133.981, 134.834, 135.325, 133.694, 133.893, 134.541, 132.695, 132.351, 132.535, 131.756, 130.484, 130.256, 130.263, 128.677, 127.308, 128.573, 128.312, 128.179, 129.618, 129.381, 128.32, 129.9, 130.474, 130.709, 131.96, 131.316, 133.893, 131.149, 129.787, 129.849, 130.432, 130.943, 132.346, 132.733, 131.08, 131.604, 133.871, 134.49, 132.602, 131.673, 132.525, 131.432, 132.355, 133.365, 132.348, 131.08, 129.019, 128.38, 127.195, 127.205, 127.126, 128.176, 126.504, 124.532, 124.775, 126.497, 126.272, 127.943, 129.206, 130.418, 130.37, 132.031, 131.498, 130.075, 130.19, 131.771, 131.589, 135.292, 136.03, 135.399, 133.487, 134.004, 134.552, 133.246, 134.383, 134.287, 135.719, 137.58, 136.88, 138.311, 139.305, 140.007], FOB=[135.76, 130.11, 130.61, 129.76, 128.0, 128.99, 127.12, 124.94, 124.44, 124.38, 124.6, 123.64, 124.25, 123.14, 122.74, 121.19, 119.83, 119.18, 119.59, 119.36, 119.54, 118.73, 118.69, 119.85, 120.86, 119.3, 119.22, 119.46, 120.38, 120.91, 121.13, 121.25, 121.3, 119.94, 120.22, 119.94, 120.32, 120.7, 120.66, 121.52, 121.22, 121.8, 123.32, 122.57, 122.0, 122.31, 122.92, 123.24, 122.28, 120.77, 121.05, 122.56, 123.41, 122.55, 122.72, 122.87, 123.92, 124.1, 123.0, 122.81, 122.49, 122.31, 123.05, 122.42, 121.47, 121.81, 120.94, 120.57, 120.29, 120.77, 120.31, 120.41, 120.17, 120.62, 120.49, 120.91, 121.12, 121.83, 122.58, 122.48, 122.92, 122.51, 121.64, 120.94, 121.49, 122.31, 122.81, 123.54, 122.32, 122.88, 123.51, 123.67, 123.18, 123.32, 123.48, 123.48, 124.27, 124.59, 124.23, 124.53, 123.94, 123.97, 124.36, 124.12, 124.69, 125.51, 125.73, 124.69, 122.68, 123.9, 123.91, 124.68, 125.56, 125.96, 126.61, 127.5, 127.64, 127.59, 127.43, 127.82, 127.87, 129.93, 132.04, 132.52, 132.69, 132.58, 133.31, 132.94, 133.14, 133.94, 134.11, 135.73, 136.77, 137.84, 139.28, 140.26], BAL=[117.5, 117.0, 117.0, 117.5, 118.0, 119.0, 120.0, 119.0, 119.0, 119.0, 119.0, 119.0, 119.0, 119.0, 118.5, 117.0, 116.5, 116.0, 116.0, 115.0, 115.0, 115.0, 115.0, 116.0, 117.0, 117.0, 116.5, 116.5, 117.0, 117.0, 116.5, 116.0, 115.5, 114.5, 114.0, 114.0, 115.0, 116.0, 116.0, 116.5, 117.5, 117.5, 118.5, 118.5, 117.0, 117.0, 117.5, 118.0, 118.0, 116.0, 116.0, 116.0, 117.0, 119.0, 118.0, 118.0, 118.5, 119.5, 117.5, 117.0, 116.0, 116.0, 116.0, 116.0, 115.5, 115.0, 115.0, 115.0, 113.5, 113.5, 113.0, 112.0, 112.0, 112.5, 112.0, 112.0, 112.0, 112.0, 112.0, 112.0, 113.0, 112.5, 112.0, 112.0, 112.0, 113.0, 113.0, 113.0, 113.0, 113.0, 114.0, 114.5, 114.0, 114.0, 114.0, 114.0, 114.0, 114.0, 114.5, 115.0, 115.0, 114.0, 113.0, 113.0, 114.0, 114.0, 113.5, 112.0, 112.0, 112.0, 113.0, 113.0, 113.0, 113.0, 115.0, 115.0, 115.0, 115.0, 114.0, 114.5, 116.0, 117.5, 117.5, 119.0, 118.5, 119.0, 120.0, 119.5, 119.0, 120.0, 120.5, 122.0, 122.0, 122.5, 125.5, 126.0], BASIS=[89.652, 29.335, 46.942, 25.027, 16.945, 30.244, 25.154, 13.787, 6.741, -12.25, -16.654, -7.044, -5.821, -9.43, -16.328, -19.334, -24.59, -37.427, -31.977, -32.193, -28.809, -34.547, -63.873, -76.719, -64.695, -67.221, -82.414, -77.048, -86.518, -84.302, -76.432, -88.286, -76.554, -94.686, -95.803, -106.025, -104.263, -104.961, -109.485, -125.206, -114.644, -128.618, -139.288, -129.114, -125.236, -138.204, -157.908, -168.807, -102.0, -102.946, -106.105, -108.571, -102.989, -103.88, -97.076, -103.969, -98.924, -83.192, -94.351, -102.103, -89.866, -88.267, -83.5, -82.071, -80.273, -75.553, -84.148, -73.229, -63.839, -70.825, -72.58, -70.744, -86.009, -80.008, -71.696, -81.559, -85.387, -80.764, -85.119, -80.49, -100.209, -79.807, -75.016, -82.005, -82.819, -79.952, -88.267, -84.978, -79.814, -77.989, -93.881, -97.307, -85.213, -75.727, -81.661, -71.725, -72.451, -78.855, -72.789, -59.036, -45.963, -39.639, -24.994, -27.068, -21.342, -23.36, -6.824, 1.411, -18.797, -23.2, -21.172, -28.633, -32.229, -39.025, -32.732, -39.73, -33.921, -21.755, -24.231, -34.458, -32.436, -47.255, -35.132, -25.302, -7.063, -12.652, -11.001, -2.735, -11.103, -3.089, -14.264, -16.488, -0.982, -4.22, -0.221, 2.264];
+const MN=["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul"], M_BASIS=[3.5, -78.5, -115.6, -79.3, -82.1, -28.1, -15.1], M_FOB=[125.1, 120.1, 122.4, 121.3, 123.0, 125.2, 133.7], M_BAL=[117.9, 115.8, 117.5, 113.7, 113.3, 113.7, 119.9], M_SPREAD=[7.2, 4.3, 5.0, 7.7, 9.7, 11.6, 13.8];
+
+
+const LINHA='#d8cbb2',TINTA='#6a5a45',VERDE='#3f7d4e',COBRE='#c0662e',TRIGO='#c9a247',AZUL='#2f6a7d';
+Chart.defaults.font.family="'Helvetica Neue',Arial,sans-serif";Chart.defaults.font.size=11;Chart.defaults.color=TINTA;
+function brDate(iso){const p=iso.split('-');return p[2]+'/'+p[1];}
+
+// P1 combinado
+new Chart(document.getElementById('c_comb'),{
+  data:{labels:L,datasets:[
+    {type:'line',label:'Soja CBOT (US$/bu)',data:CBOT,borderColor:VERDE,borderWidth:2,tension:.15,pointRadius:0,pointHoverRadius:4,yAxisID:'y'},
+    {type:'line',label:'Dólar/Real (R$/US$)',data:DOL,borderColor:COBRE,borderWidth:2,tension:.15,pointRadius:0,pointHoverRadius:4,yAxisID:'y1'}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,boxHeight:12,padding:16}},
+      tooltip:{backgroundColor:'#2c2114',padding:10,cornerRadius:2,callbacks:{title:(it)=>brDate(L[it[0].dataIndex])}}},
+    scales:{x:{grid:{display:false},ticks:{maxRotation:0,autoSkip:true,maxTicksLimit:9,callback:function(v){return brDate(this.getLabelForValue(v))}}},
+      y:{position:'left',title:{display:true,text:'Soja — US$/bushel',color:VERDE,font:{weight:'700'}},grid:{color:LINHA},ticks:{color:VERDE,callback:v=>'US$ '+v.toFixed(1)}},
+      y1:{position:'right',title:{display:true,text:'Dólar — R$/US$',color:COBRE,font:{weight:'700'}},grid:{drawOnChartArea:false},ticks:{color:COBRE,callback:v=>'R$ '+v.toFixed(2)}}}}
+});
+
+// P2 basis
+new Chart(document.getElementById('c_basis'),{type:'line',
+  data:{labels:L,datasets:[{data:BASIS,borderColor:AZUL,borderWidth:2,tension:.15,pointRadius:0,pointHoverRadius:4,
+    segment:{borderColor:ctx=>ctx.p1.parsed.y<0?COBRE:AZUL},backgroundColor:'rgba(47,106,125,.06)',fill:{value:0}}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{backgroundColor:'#2c2114',padding:10,cornerRadius:2,displayColors:false,
+      callbacks:{title:(it)=>brDate(L[it[0].dataIndex]),label:(c)=>'Basis '+c.parsed.y.toFixed(1)+' ¢/bu'}}},
+    scales:{x:{grid:{display:false},ticks:{maxRotation:0,autoSkip:true,maxTicksLimit:9,callback:function(v){return brDate(this.getLabelForValue(v))}}},
+      y:{grid:{color:LINHA},ticks:{callback:v=>v.toFixed(0)+' ¢'}}}}
+});
+
+// P3 sazonalidade barras
+new Chart(document.getElementById('c_saz'),{type:'bar',
+  data:{labels:MN,datasets:[{data:M_BASIS,backgroundColor:M_BASIS.map(v=>v<0?COBRE:VERDE),borderRadius:2,barPercentage:.66}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{backgroundColor:'#2c2114',padding:10,cornerRadius:2,displayColors:false,
+      callbacks:{label:(c)=>'Basis médio '+c.parsed.y.toFixed(1)+' ¢/bu'}}},
+    scales:{x:{grid:{display:false}},y:{grid:{color:LINHA},ticks:{callback:v=>v.toFixed(0)+' ¢'}}}}
+});
+
+// P3 dual FOB x basis
+new Chart(document.getElementById('c_dual'),{
+  data:{labels:MN,datasets:[
+    {type:'bar',label:'FOB médio (R$/sc)',data:M_FOB,backgroundColor:'rgba(201,162,71,.75)',borderRadius:2,barPercentage:.6,yAxisID:'y'},
+    {type:'line',label:'Basis médio (¢/bu)',data:M_BASIS,borderColor:COBRE,backgroundColor:COBRE,borderWidth:2.6,tension:.25,pointRadius:4,pointBackgroundColor:COBRE,yAxisID:'y1'}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,boxHeight:12,padding:16}},tooltip:{backgroundColor:'#2c2114',padding:10,cornerRadius:2}},
+    scales:{x:{grid:{display:false}},
+      y:{position:'left',title:{display:true,text:'FOB — R$/saca',color:'#a8842f',font:{weight:'700'}},grid:{color:LINHA},ticks:{color:'#a8842f',callback:v=>'R$ '+v.toFixed(0)},min:110},
+      y1:{position:'right',title:{display:true,text:'Basis — ¢/bushel',color:COBRE,font:{weight:'700'}},grid:{drawOnChartArea:false},ticks:{color:COBRE,callback:v=>v.toFixed(0)}}}}
+});
+
+// P4 três linhas
+new Chart(document.getElementById('c_tri'),{
+  data:{labels:L,datasets:[
+    {type:'line',label:'FOB Paraná (R$/sc)',data:FOB,borderColor:TRIGO,backgroundColor:'rgba(201,162,71,.10)',borderWidth:2.4,tension:.15,pointRadius:0,pointHoverRadius:4,fill:'+1'},
+    {type:'line',label:'Balcão ao produtor (R$/sc)',data:BAL,borderColor:VERDE,borderWidth:2.4,tension:.15,pointRadius:0,pointHoverRadius:4},
+    {type:'line',label:'Paridade pura CBOT (R$/sc)',data:CONV,borderColor:AZUL,borderWidth:2,borderDash:[5,4],tension:.15,pointRadius:0,pointHoverRadius:4}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{display:false},tooltip:{backgroundColor:'#2c2114',padding:11,cornerRadius:2,
+      callbacks:{title:(it)=>brDate(L[it[0].dataIndex]),label:(c)=>c.dataset.label+': R$ '+c.parsed.y.toFixed(1)}}},
+    scales:{x:{grid:{display:false},ticks:{maxRotation:0,autoSkip:true,maxTicksLimit:9,callback:function(v){return brDate(this.getLabelForValue(v))}}},
+      y:{grid:{color:LINHA},ticks:{callback:v=>'R$ '+v.toFixed(0)}}}}
+});
+
+// scrollspy leve
+const links=[...document.querySelectorAll('nav.toc a')];
+const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+addEventListener('scroll',()=>{let i=secs.findIndex((s,k)=>s.getBoundingClientRect().top>90);
+  i=i<=0?(secs[secs.length-1].getBoundingClientRect().top<90?secs.length-1:0):i-1;
+  links.forEach(l=>l.style.background='');if(links[i]){links[i].style.background='var(--areia2)';}},{passive:true});
+</script>
+</body>
+</html>
